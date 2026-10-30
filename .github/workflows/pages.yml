@@ -19,7 +19,9 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  # Newest commit wins. A queued run also releases the group, so a deploy that
+  # never gets a runner cannot block every future deployment of the site.
+  cancel-in-progress: true
 
 jobs:
   build:
