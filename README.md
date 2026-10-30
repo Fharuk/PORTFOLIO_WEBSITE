@@ -37,6 +37,30 @@ these are three routes of one app, not three apps:
 All three prerender to static HTML (`○` in the build output); there is no
 runtime dependency on a server.
 
+### GitHub Pages — second, wall-free copy
+
+The same three routes are also published at
+<https://fharuk.github.io/PORTFOLIO_WEBSITE/>, built by
+`.github/workflows/pages.yml` on every push to this branch. Vercel remains the
+primary URL; this is a second copy with no account dependency and no protection
+layer. The repository is public, which is what makes Pages available on the Free
+plan in the first place.
+
+Pages can only serve files, so that job builds a static export rather than the
+Next.js server output. `STATIC_EXPORT=1` turns on `output: 'export'` and
+`STATIC_BASE_PATH` supplies the `/<repo>/` prefix a project site needs — without
+it the CSS, chunks and portrait all 404, because `next/image` does not prefix
+`/public` assets with `basePath`:
+
+```bash
+STATIC_EXPORT=1 STATIC_BASE_PATH=/PORTFOLIO_WEBSITE npm run build   # → out/
+```
+
+Two consequences of exporting: images are unoptimised, since there is no
+optimiser to call, and anything needing a server at runtime would not work.
+Neither applies here — all pages prerender and the WebGL surfaces run on the
+client.
+
 **Node is pinned to `22.x`** in `package.json`. Vercel's project default is
 `26.x`, and a bare range such as `>=20` resolves to the newest release. The
 pin is deliberate: pin the major, not a range.
