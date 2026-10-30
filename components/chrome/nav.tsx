@@ -39,6 +39,11 @@ function RefractionFilter() {
 export function VariantSwitch({ compact }: { compact?: boolean }) {
   const pathname = usePathname()
 
+  // The static export served by GitHub Pages uses trailing slashes, so
+  // usePathname() yields "/chrome/" there and "/chrome" on Vercel. Without
+  // normalising, the active pill silently never appears on the Pages copy.
+  const current = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname
+
   return (
     <div
       className={cn(
@@ -47,7 +52,7 @@ export function VariantSwitch({ compact }: { compact?: boolean }) {
       )}
     >
       {VARIANTS.map((v) => {
-        const active = pathname === v.href
+        const active = current === v.href
         return (
           <Link
             key={v.key}

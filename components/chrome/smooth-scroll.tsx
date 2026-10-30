@@ -37,6 +37,11 @@ export function SmoothScroll() {
       if (!el) return
       e.preventDefault()
       lenis.scrollTo(el as HTMLElement, { offset: 0, duration: 1.4 })
+      // Lenis moves the viewport but not the focus target, which strands
+      // keyboard users at the top of the tab order. Focusing is a no-op for
+      // elements that cannot take focus (#main is tabIndex -1), so this only
+      // takes effect where it should.
+      if (el instanceof HTMLElement) el.focus({ preventScroll: true })
     }
     document.addEventListener('click', onClick)
 

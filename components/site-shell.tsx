@@ -23,7 +23,9 @@ export function SiteShell({
 }) {
   return (
     <div data-variant={variant}>
-      <main id="main">
+      {/* tabIndex -1 so the skip link can actually move focus here, not just
+          scroll. outline-none only suppresses the ring on this wrapper. */}
+      <main id="main" tabIndex={-1} className="outline-none">
         {hero}
         <Statement />
         <Flight />
