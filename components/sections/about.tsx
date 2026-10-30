@@ -10,7 +10,7 @@ export function About() {
           <div className="md:sticky md:top-28 md:self-start">
             <div className="portrait-frame w-full max-w-[24rem]">
               <Image
-                src="/portrait.jpg"
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/portrait.jpg`}
                 alt={`${site.fullName}, ${site.role}`}
                 width={661}
                 height={1176}
