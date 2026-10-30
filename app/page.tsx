@@ -1,21 +1,13 @@
-import { Hero } from '@/components/hero/hero'
-import { Statement } from '@/components/sections/statement'
-import { Flight } from '@/components/work/flight'
-import { WorkIndex } from '@/components/work/work-index'
-import { About, Experience } from '@/components/sections/about'
-import { Contact, Footer } from '@/components/sections/contact'
+import type { Metadata } from 'next'
+import { SiteShell } from '@/components/site-shell'
+import { FluxHero } from '@/components/hero/flux-hero'
+import { site } from '@/content/site'
+
+export const metadata: Metadata = {
+  title: `${site.fullName} — ${site.role}`,
+  description: site.positioning,
+}
 
 export default function Home() {
-  return (
-    <main id="main">
-      <Hero />
-      <Statement />
-      <Flight />
-      <WorkIndex />
-      <About />
-      <Experience />
-      <Contact />
-      <Footer />
-    </main>
-  )
+  return <SiteShell variant="flux" hero={<FluxHero />} />
 }

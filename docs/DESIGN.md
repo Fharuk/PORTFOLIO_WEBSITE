@@ -1,121 +1,140 @@
 # Design decisions
 
-A record of what was chosen and what was deliberately refused, so the next
-person (or the next agent) extends the system instead of fighting it.
+What was chosen, what was refused, and what changed when the real subject
+arrived. Written so the next person extends this instead of fighting it.
 
-## The brief I designed against
+## The brief, corrected
 
-Subject: a design engineer whose work *is* the render — real-time graphics,
-interface engineering, the frame budget in between. Audience: people hiring for
-exactly that, who look at a portfolio the way a mechanic listens to an engine.
+The first pass was built for an imagined *design engineer* — a WebGL specialist.
+The real subject is an **Electrical & Electronics Engineering graduate** working
+across power systems, applied machine learning, Primavera P6 planning and
+technical support, in Lagos.
 
-The page had to be undeniable evidence of the skill, not a description of it.
-So the hero is a live shader, and the scrolling is a camera move.
+That is not a persona tweak. The liquid-chrome hero, the "design systems"
+capability list, the invented projects — all of it was wrong and was removed.
+What survived was the craft layer: the type system, the motion rules, the glass,
+the scroll engine. What replaced the content is his actual record: 26 projects,
+3 P6 models, 5 Zenodo records, 28 credentials.
+
+The lesson recorded here on purpose: **a portfolio's visuals are downstream of
+who the person is.** I should have asked for the subject before building.
+
+## Three variants, one page
+
+The same person read three ways. Structural markup, spacing, type scale and
+every section below the hero are identical — they render through one
+`SiteShell`. Only three things change:
+
+| Variant | Hero surface | Accent | What it argues |
+|---|---|---|---|
+| **Flux** (`/`) | Dipole stream lines, ψ = sin θ / r | Electric blue / cyan | "This is an engineer." The field is computed, not drawn. |
+| **Chrome** (`/chrome`) | 3D distorted chrome + liquid-metal wordmark | Platinum / warm bone | "This is a maker." The most visceral of the three. |
+| **Energy** (`/energy`) | Rotor, poles, live power trace | Amber / teal | "This is power systems." The most specific. |
+
+Implementation: a `data-variant` attribute on the page wrapper swaps six custom
+properties — accent, accent-2, glow, and two field tints. No duplicated
+components, no forked CSS.
+
+## Why the flux variant is the default
+
+It is the only one that makes a technical claim on his behalf. A dipole's field
+lines are contours of an analytic stream function, so what you see is the actual
+solution for a magnet — a fluid swirl would have been decoration. It also costs
+the least to run and reads at every screen size, including on a phone where the
+3D chrome is deliberately skipped.
 
 ## Palette
 
-Chromatic darks, not "black with grey tints".
+Chromatic darks, not "black with grey tints". Shared across variants:
 
 | Token | Value | Role |
 |---|---|---|
-| `void` | `#04060e` | page ground — carries indigo, not neutral |
-| `abyss` | `#080d1b` | raised surfaces |
+| `void` | `#04060e` | ground — carries indigo |
 | `slate` | `#121a2f` | glass tint base |
-| `shale` | `#1d2740` | rules and hairlines |
-| `haze` | `#7b88a6` | secondary text (5.4:1 on void — passes AA) |
-| `mist` | `#b6c2dc` | primary body text |
-| `bone` | `#f3f0e7` | headings, highlights — warm, never pure white |
-| `focus` | `#8ab4ff` | focus ring only |
+| `shale` | `#1d2740` | rules and hairlines only, never text |
+| `haze` | `#7b88a6` | secondary text (5.4:1 — passes AA) |
+| `mist` | `#b6c2dc` | body text |
+| `bone` | `#f3f0e7` | headings — warm, never pure white |
 
-**There is no flat accent colour.** The accent is the liquid metal, which is a
-moving iridescent gradient. That is a choice with a cost — it means nothing static
-can "match" it — and the payoff is that no single hue on the page reads as a
-default.
+Per variant: `--accent`, `--accent-2`, `--glow`, and two field tints. The accent
+is used for metrics, the quote rule and the mark's conic gradient — nowhere else.
+Bolding every heading in the accent colour would flatten the hierarchy.
 
 ## Type
 
-Two families, clearly distinct, both variable.
+Two variable families, clearly distinct.
 
-- **Bricolage Grotesque** — display. Engineered, slightly irregular, holds up at
-  9rem and at 1.25rem. `font-stretch` is used rather than a second family to get
-  width contrast; the `.display` class runs it at 96%.
-- **Instrument Sans** — body. More character than Inter at small sizes without
-  becoming a distraction.
+- **Bricolage Grotesque** — display. `font-stretch` at 96% for the hero, optical
+  sizing on. Holds at 9.5rem and at 1.05rem.
+- **Instrument Sans** — body. More character than Inter at small sizes.
 
-No third family. No monospace — monospace micro-labels are one of the clearest
-tells of generated UI, and nothing here is a numeric table.
+No third family. No monospace: mono micro-labels are one of the clearest tells
+of generated UI, and there is no numeric table here that needs one. Numbers use
+tabular figures in the display face instead (`.metric`, `.tabular`).
 
-Scale follows *The Elements of Typographic Style*: 1.28 ratio, wider steps for
-display, measure capped at 66ch.
+## What was refused
 
-## What was refused, and why
+The `frontend-design` skill lists the defaults that make a page read as
+generated. Each was checked:
 
-The `frontend-design` skill lists the specific defaults that make a page read as
-generated. Each one was checked and avoided:
-
-| Default | What this page does instead |
+| Default | What this does instead |
 |---|---|
-| Warm cream + serif + terracotta accent | Chromatic indigo dark, no terracotta anywhere |
-| Near-black with one acid-green accent | No flat acid accent; iridescence comes from the shader |
-| Tracked-out ALL-CAPS eyebrow above every heading | Headings are headings. No eyebrows at all. |
-| `A · B · C` meta strings with middle dots | Location and role are separate lines, or a full sentence |
+| Warm cream + serif + terracotta | Chromatic indigo darks; terracotta appears nowhere |
+| Near-black + one acid-green accent | No acid accent; colour comes from the field or the metal |
+| ALL-CAPS tracked eyebrow over every heading | No eyebrows |
+| `A · B · C` middle-dot meta strings | Separate lines, or a sentence |
 | `WORD — fragment` labels | Plain sentences |
-| `→` appended to every link | Links underline from the left on hover; state, not ornament |
-| `01 / 02 / 03` numbered markers | Used **nowhere**, because no content here is a real sequence — except the flight stations, which are shown as a progress rail, not as numerals |
-| Identical rounded cards, one radius, one shadow | Project rows with hairline rules and a 4% colour tint; one radius per element class, chosen per element |
-| Fade-and-slide-up on every section | One orchestrated page-load in the hero, then motion only where it answers the scroll or a press |
-| Meta strings in monospace | Instrument Sans with tabular numerals |
+| `→` on every link | Links underline from the left on hover |
+| `01 / 02 / 03` numbered markers | Removed from the capability list once I checked — those pillars are parallel, not sequential. Numbers survive only in the P6 stat blocks, where the data really is a set of counts. |
+| Identical rounded cards, one shadow | Featured work is an asymmetric grid (one wide, four square); the remaining 21 are a two-column hairline list, not 21 more cards |
+| Fade-and-slide-up on every section | One orchestrated hero reveal, then motion only where it answers scroll or press |
 
 ## Layout
 
-Asymmetric 12-column frame, content left-aligned, generous negative space. The
-hero is bottom-weighted on purpose: the fixed nav floats over empty field, and
-the chrome word sits low, so the page reads as a viewport onto something larger
-rather than a centred poster.
-
-Sections alternate between full-grid text and pinned two-column layouts. The
-About block's heading sticks while its body scrolls — a small spatial cue that
-you are inside one idea, not passing through two.
+Asymmetric, left-aligned, generous negative space. The About section pins the
+portrait while the copy scrolls past it — a spatial cue that you are inside one
+idea. The work catalogue is a list, not a grid of cards, because 21 items with
+the same box is a wall.
 
 ## Motion
 
-One rule: **motion either answers an action or communicates space.** Nothing else.
+Motion either answers an action or communicates space.
 
-- Hero load: a single orchestrated reveal, ~1.2s, then it stops.
-- Statement: words resolve as the section crosses the viewport — scroll-driven,
-  so it is answering you.
-- Flight: scroll is a scrubber, not a slideshow trigger.
-- Press feedback on every control: `scale(0.97)` at 150ms, `--ease-out-quint`.
-- Hover colour transitions at 200–300ms with custom cubic-beziers; the CSS
-  `ease` keyword was not used anywhere. `ease-in` appears nowhere.
-- `prefers-reduced-motion` gets a **static** poster and no scrub — not a slower
-  version of the same animation.
-
-## Performance
-
-- `dpr` capped at 1.75 (`1.25` on coarse pointers).
-- Each canvas is gated behind an `IntersectionObserver` and unmounted when it
-  leaves view, so at most one WebGL context is ever live.
-- Hero shader is mounted only while the hero is on screen.
-- The 3D flight is a separate `dynamic()` chunk; it never blocks first paint.
-- Production build: **167 kB first-load JS**, static prerender, no server work.
-- Every canvas has a CSS fallback painted underneath it.
+- Hero: one orchestrated reveal (~1.2s), then it stops.
+- Statement: words resolve on scroll — answering the visitor.
+- Flight: scroll is a scrubber on a single camera spline. Velocity is smoothed
+  (`p += (target - p) * 0.085`) so the camera inherits inertia.
+- Press: `scale(0.97)` at 150ms, `--ease-out-quint`. Nothing else on controls.
+- Custom easings only. `ease-in` appears nowhere; the CSS `ease` keyword is not
+  used. `prefers-reduced-motion` gets a static frame, not a slowed animation.
 
 ## Accessibility
 
-- The chrome word is `aria-hidden` canvas; the real `<h1>` is in the DOM.
-- Skip link, visible `:focus-visible` rings at 3px offset, `aria-expanded` on
-  every disclosure, `aria-labelledby` on every section.
-- Body text meets AA on the darkest ground; `haze` is the floor at 5.4:1.
+- Portraits have descriptive alt text; every decorative canvas is `aria-hidden`.
+- Skip link, 3px `:focus-visible` rings at 3px offset.
+- `aria-expanded` / `aria-controls` on every disclosure; `aria-pressed` on filters.
 - `aria-live` on the copy-to-clipboard confirmation.
-- Escape closes the mobile sheet; body scroll locks while it is open.
-- Interactive targets are ≥40px on touch.
+- Credentials are buttons with real `hidden` regions, so they work without JS.
+- Body text meets AA on the darkest ground; `haze` is the floor at 5.4:1.
+  `shale` is restricted to 1px rules and is never used for text.
+
+## Performance
+
+- One WebGL context per viewport, `IntersectionObserver`-gated and unmounted off
+  screen. The 3D chrome scene is skipped entirely on coarse pointers.
+- The chrome environment is baked once (`frames={1}`) — it never changes, so
+  re-rendering it every frame would be waste.
+- `dpr` capped at 1.75 (1.6 for 3D, 1.25 on coarse pointers).
+- Static prerender. First-load JS: 184 kB (`/`), 187 kB (`/chrome`), 185 kB
+  (`/energy`).
 
 ## Known gaps
 
-- Content in `content/site.ts` is placeholder — persona, roles, project names
-  and contact details all need replacing.
-- No case-study routes yet; rows expand in place.
+- No case-study routes; project cards do not link out except to Zenodo.
 - No OG image, favicon, or `sitemap.ts`.
-- No form — contact is a clipboard copy plus `mailto`. A form needs a service and
-  a spam answer before it is worth shipping.
+- Contact is copy-to-clipboard plus `tel:` and `mailto:` — no form, because a
+  form needs a service and a spam answer before it is worth shipping.
+- `@shadergradient/react` was evaluated and removed. It works (the library needs
+  an `exports` alias to resolve under Next's `react-server` condition), but
+  after the persona changed it added a third live WebGL context for a generic
+  gradient plane. The two bespoke shaders do more, for less.

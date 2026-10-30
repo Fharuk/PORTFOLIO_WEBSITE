@@ -329,3 +329,88 @@ button {
 .skip-link:focus-visible {
   transform: translateY(0);
 }
+
+/* ============================================================
+   Variants
+   Three readings of the same person. Everything structural is
+   shared; only the accent, the light temperature and the hero
+   surface change. Set data-variant on the page wrapper.
+   ============================================================ */
+[data-variant='flux'] {
+  --accent: #6ea8ff;
+  --accent-2: #58d6e6;
+  --accent-ink: #0a1330;
+  --glow: rgba(110, 168, 255, 0.18);
+  --field-a: rgba(60, 96, 168, 0.42);
+  --field-b: rgba(38, 132, 150, 0.26);
+}
+
+[data-variant='chrome'] {
+  --accent: #dfe3ec;
+  --accent-2: #e7c9a4;
+  --accent-ink: #0b0d14;
+  --glow: rgba(223, 227, 236, 0.14);
+  --field-a: rgba(150, 160, 190, 0.30);
+  --field-b: rgba(190, 160, 130, 0.20);
+}
+
+[data-variant='energy'] {
+  --accent: #f0b46a;
+  --accent-2: #4fd1b0;
+  --accent-ink: #1a1206;
+  --glow: rgba(240, 180, 106, 0.16);
+  --field-a: rgba(168, 116, 52, 0.34);
+  --field-b: rgba(40, 130, 116, 0.26);
+}
+
+/* ============================================================
+   Components shared by every variant
+   ============================================================ */
+.metric {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--accent-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--color-bone) 14%, transparent);
+  padding: 0.32rem 0.7rem;
+  font-size: 0.8125rem;
+  color: var(--color-mist);
+  transition:
+    color 200ms var(--ease-out-quint),
+    border-color 200ms var(--ease-out-quint),
+    background 200ms var(--ease-out-quint);
+}
+.chip[data-active='true'] {
+  background: var(--color-bone);
+  border-color: var(--color-bone);
+  color: var(--color-void);
+}
+@media (hover: hover) {
+  .chip:not([data-active='true']):hover {
+    color: var(--color-bone);
+    border-color: color-mix(in oklab, var(--color-bone) 34%, transparent);
+  }
+}
+
+.portrait-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  background: var(--color-slate);
+}
+.portrait-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-bone) 14%, transparent);
+  border-radius: inherit;
+  pointer-events: none;
+}
