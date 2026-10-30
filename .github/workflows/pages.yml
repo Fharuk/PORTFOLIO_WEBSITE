@@ -3,12 +3,8 @@ name: Deploy to GitHub Pages
 # Second public home for the portfolio, alongside Vercel.
 #
 # Vercel builds the default Next.js server output; this job builds the static
-# export (STATIC_EXPORT=1) and publishes the resulting `out/` directory as a
-# Pages artifact. No `gh-pages` branch is involved — actions/deploy-pages
-# uploads the artifact directly.
-#
-# Note the base path: a project site lives at /<repo>/, so every asset URL has
-# to be prefixed or the CSS, chunks and portrait 404.
+# export (STATIC_EXPORT=1) and publishes `out/` as a Pages artifact. No
+# `gh-pages` branch is involved — actions/deploy-pages uploads the artifact.
 
 on:
   push:
@@ -29,9 +25,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: npm
@@ -39,20 +35,21 @@ jobs:
       - name: Install
         run: npm ci --no-audit --no-fund
 
-      # enablement:true means the first run turns Pages on by itself, so there
-      # is no separate Settings -> Pages step. Requires a public repo on the
-      # Free plan; on a private repo it needs Pro or above.
-      - uses: actions/configure-pages@v5
-        with:
-          enablement: true
+      # No `enablement` input: enabling Pages needs a token with admin rights,
+      # and GITHUB_TOKEN is refused there. Pages is enabled on the repo itself
+      # (Settings -> Pages -> Source: GitHub Actions), so this only reads config.
+      - uses: actions/configure-pages@v6
 
       - name: Build static export
         run: npm run build
         env:
           STATIC_EXPORT: '1'
           STATIC_BASE_PATH: /${{ github.event.repository.name }}
+          # Origin for canonical/OpenGraph/sitemap. Without it metadataBase falls
+          # back to localhost on this host and the share card points nowhere.
+          NEXT_PUBLIC_SITE_URL: https://fharuk.github.io
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: out
 
@@ -64,4 +61,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

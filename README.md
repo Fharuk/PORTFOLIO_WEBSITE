@@ -61,6 +61,42 @@ optimiser to call, and anything needing a server at runtime would not work.
 Neither applies here — all pages prerender and the WebGL surfaces run on the
 client.
 
+### Metadata, canonical URLs and the share card
+
+`lib/site-url.ts` is the single source of truth for where the site lives. It
+resolves the origin as `NEXT_PUBLIC_SITE_URL` → Vercel's build-time
+`VERCEL_PROJECT_PRODUCTION_URL` → localhost, and exposes `p()` for root-relative
+paths with the base path applied.
+
+That helper exists because `basePath` is **not** applied automatically to
+hand-written paths or `next/image` sources. On GitHub Pages an unprefixed
+`/og.png` resolves to `fharuk.github.io/og.png` — the wrong directory — so every
+metadata URL goes through `p()`.
+
+Each route declares itself canonical via `lib/metadata.ts`. That helper builds
+the whole OpenGraph block rather than just its title, because Next **replaces** a
+parent's `openGraph` object wholesale instead of deep-merging: a page that set
+only `openGraph.title` would silently lose the share image.
+
+The share card is a committed 1200×630 PNG at `public/og.png`, generated with
+satori (`next/og`) rather than a `opengraph-image.tsx` route, because dynamic
+image routes are unavailable under `output: 'export'`. Regenerate it after
+changing the copy:
+
+```bash
+npm run og
+```
+
+Fonts: satori rejects woff2 and cannot parse this variable font's `fvar` table,
+so `scripts/fonts/` holds a static weight-600 instance converted with fonttools.
+
+Also emitted: `app/icon.svg` (favicon), `app/sitemap.ts` and `app/robots.ts`.
+Both metadata routes need `export const dynamic = 'force-static'` — without it
+the `output: 'export'` build fails outright.
+
+`npm run lint` runs real ESLint (`eslint .`), not `next lint`, which was removed
+in Next 16 and otherwise drops into an interactive setup prompt.
+
 **Node is pinned to `22.x`** in `package.json`. Vercel's project default is
 `26.x`, and a bare range such as `>=20` resolves to the newest release. The
 pin is deliberate: pin the major, not a range.

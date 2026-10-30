@@ -28,7 +28,7 @@ export function Planning() {
         </div>
 
         <div className="flex flex-col">
-          {site.p6.map((m, i) => (
+          {site.p6.map((m) => (
             <article
               key={m.title}
               className="group grid gap-6 border-t border-[color-mix(in_oklab,var(--color-shale)_60%,transparent)] py-[clamp(1.75rem,3.5vw,2.75rem)] last:border-b md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] md:gap-12"
