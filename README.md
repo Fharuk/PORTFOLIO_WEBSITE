@@ -41,13 +41,17 @@ runtime dependency on a server.
 `26.x`, and a bare range such as `>=20` resolves to the newest release. The
 pin is deliberate: pin the major, not a range.
 
-**Deployment protection is currently on.** New Vercel projects default to
-`all_except_custom_domains`, which means the `.vercel.app` URLs answer with a
-"Protected Deployment" login wall instead of the site. Anyone who is not logged
-into the Vercel account sees a login page. To make them public: project →
-**Settings → Deployment Protection → Vercel Authentication → Disabled**, then
-save. No redeploy is needed. Attaching a custom domain also bypasses it, since
-protection is set to exempt custom domains.
+**Deployment protection must stay off.** New Vercel projects default to
+`all_except_custom_domains`, which makes the `.vercel.app` URLs answer with a
+"Protected Deployment" login wall instead of the site — visible only to people
+already signed into the Vercel account, i.e. invisible to everyone the portfolio
+is for. It has been disabled here. If protection is ever re-enabled: project →
+**Settings → Deployment Protection → Vercel Authentication → Disabled**, save,
+and it takes effect immediately with no redeploy. Attaching a custom domain also
+bypasses it, since the default setting exempts custom domains.
+
+Verify from a signed-out context, not a signed-in browser — a logged-in owner
+passes straight through the wall and sees a working site either way.
 
 Redeploy after a push:
 
