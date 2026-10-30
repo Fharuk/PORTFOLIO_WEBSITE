@@ -22,6 +22,45 @@ npm run build
 npm run typecheck
 ```
 
+## Deployment
+
+Live on Vercel as project **`faruk-portfolio`**, building the branch
+`arena/778253f2-portfolio-website`. One deployment serves all three readings —
+these are three routes of one app, not three apps:
+
+| Route | URL |
+|---|---|
+| Flux | https://faruk-portfolio-fharuks-projects.vercel.app/ |
+| Chrome | https://faruk-portfolio-fharuks-projects.vercel.app/chrome |
+| Energy | https://faruk-portfolio-fharuks-projects.vercel.app/energy |
+
+All three prerender to static HTML (`○` in the build output); there is no
+runtime dependency on a server.
+
+**Node is pinned to `22.x`** in `package.json`. Vercel's project default is
+`26.x`, and a bare range such as `>=20` resolves to the newest release. The
+pin is deliberate: pin the major, not a range.
+
+**Deployment protection is currently on.** New Vercel projects default to
+`all_except_custom_domains`, which means the `.vercel.app` URLs answer with a
+"Protected Deployment" login wall instead of the site. Anyone who is not logged
+into the Vercel account sees a login page. To make them public: project →
+**Settings → Deployment Protection → Vercel Authentication → Disabled**, then
+save. No redeploy is needed. Attaching a custom domain also bypasses it, since
+protection is set to exempt custom domains.
+
+Redeploy after a push:
+
+```bash
+git push origin arena/778253f2-portfolio-website
+# then promote a new production build, e.g.:
+npx vercel --prod
+```
+
+Canonical and OpenGraph URLs are derived at build time from
+`NEXT_PUBLIC_SITE_URL` → `VERCEL_PROJECT_PRODUCTION_URL` → `localhost`, so
+nothing here needs editing when a custom domain is attached.
+
 ## The content
 
 Real, not placeholder. Sourced from the existing portfolio at
