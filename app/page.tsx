@@ -1,12 +1,8 @@
-import type { Metadata } from 'next'
 import { SiteShell } from '@/components/site-shell'
 import { FluxHero } from '@/components/hero/flux-hero'
-import { site } from '@/content/site'
+import { pageMetadata, siteTitle } from '@/lib/metadata'
 
-export const metadata: Metadata = {
-  title: `${site.fullName} — ${site.role}`,
-  description: site.positioning,
-}
+export const metadata = pageMetadata({ path: '/', title: siteTitle })
 
 export default function Home() {
   return <SiteShell variant="flux" hero={<FluxHero />} />
