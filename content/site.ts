@@ -52,6 +52,13 @@ export type Credential = {
   title: string
   issuer: string
   note?: string
+  /**
+   * Public verification URL for this specific certificate — the Coursera
+   * /verify/<id>, Credly badge, or EF SET certificate page. Only ever set from
+   * a link the issuer actually generated for him; never constructed by hand,
+   * because a "verify" link that does not verify is worse than no link.
+   */
+  verify?: string
 }
 
 export const categoryLabels: Record<Category, string> = {

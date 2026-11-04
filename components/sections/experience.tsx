@@ -102,7 +102,17 @@ export function Credentials() {
               Learning, on record
             </h2>
             <p className="mt-3 text-[0.875rem] text-[var(--color-haze)]">
-              {total} certificates and training records, grouped by what they are for.
+              {total} certificates and training records, grouped by what they are
+              for. Dates and issuers are as listed on{' '}
+              <a
+                href="https://www.linkedin.com/in/faruqakinmade/details/certifications/"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-[var(--color-mist)] underline decoration-[color-mix(in_oklab,var(--color-mist)_45%,transparent)] underline-offset-2 transition-colors duration-150 hover:text-[var(--color-bone)]"
+              >
+                LinkedIn
+              </a>
+              , where each one can be checked.
             </p>
           </div>
         </div>
@@ -155,6 +165,19 @@ export function Credentials() {
                       </p>
                       <p className="mt-0.5 text-[0.8125rem] leading-relaxed text-[var(--color-haze)]">
                         {c.issuer}
+                        {c.verify && (
+                          <>
+                            {' · '}
+                            <a
+                              href={c.verify}
+                              target="_blank"
+                              rel="noreferrer noopener"
+                              className="text-[var(--color-mist)] underline decoration-[color-mix(in_oklab,var(--color-mist)_45%,transparent)] underline-offset-2 transition-colors duration-150 hover:text-[var(--color-bone)]"
+                            >
+                              verify
+                            </a>
+                          </>
+                        )}
                       </p>
                     </div>
                   ))}

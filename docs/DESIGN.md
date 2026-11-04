@@ -6,7 +6,7 @@ arrived. Written so the next person extends this instead of fighting it.
 ## The brief, corrected
 
 The first pass was built for an imagined *design engineer* — a WebGL specialist.
-The real subject is an **Electrical & Electronics Engineering graduate** working
+The real subject is an **Electrical & Electronics Engineer** working
 across power systems, applied machine learning, Primavera P6 planning and
 technical support, in Lagos.
 
@@ -14,7 +14,8 @@ That is not a persona tweak. The liquid-chrome hero, the "design systems"
 capability list, the invented projects — all of it was wrong and was removed.
 What survived was the craft layer: the type system, the motion rules, the glass,
 the scroll engine. What replaced the content is his actual record: 26 projects,
-3 P6 models, 5 Zenodo records, 28 credentials.
+3 P6 models, 5 Zenodo records, 36 credentials, and three degrees — two of them
+still in progress, which the Education block says out loud.
 
 The lesson recorded here on purpose: **a portfolio's visuals are downstream of
 who the person is.** I should have asked for the subject before building.
@@ -130,8 +131,12 @@ Motion either answers an action or communicates space.
 
 ## Known gaps
 
-- No case-study routes; project cards do not link out except to Zenodo.
-- No OG image, favicon, or `sitemap.ts`.
+- No case-study routes; project cards do not link out except to Zenodo. Every
+  project already carries a `slug` for exactly this, and nothing serves it yet.
+- No per-project OG images; one static `og.png` covers the whole site.
+- Credentials have no per-certificate verification links yet. The `verify`
+  field exists on the `Credential` type and renders when set; it is populated
+  only from links the issuer generated, never guessed.
 - Contact is copy-to-clipboard plus `tel:` and `mailto:` — no form, because a
   form needs a service and a spam answer before it is worth shipping.
 - `@shadergradient/react` was evaluated and removed. It works (the library needs

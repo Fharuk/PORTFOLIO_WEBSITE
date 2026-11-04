@@ -6,6 +6,7 @@ import { Nav } from '@/components/chrome/nav'
 import { SmoothScroll } from '@/components/chrome/smooth-scroll'
 import { site } from '@/content/site'
 import { siteTitle, siteDescription } from '@/lib/metadata'
+import { jsonLd } from '@/lib/jsonld'
 import { siteOrigin } from '@/lib/site-url'
 
 /**
@@ -45,6 +46,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
+        <script
+          type="application/ld+json"
+          // Static, derived from content/site.ts at build time — no user input
+          // reaches this string. Rendered before the nav so it lands in the
+          // exported HTML for both hosts.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <SmoothScroll />
         <Nav />
         {children}

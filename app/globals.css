@@ -414,3 +414,91 @@ button {
   border-radius: inherit;
   pointer-events: none;
 }
+
+/* ============================================================
+   Print
+
+   The page is built for a dark screen: a white-on-black glass
+   surface, shader canvases, sticky chrome. Printed as-is it is
+   an ink cartridge and an unreadable one. This block inverts the
+   palette through the same tokens every component already reads,
+   and removes the layers that have no meaning on paper — so
+   "Save as PDF" produces something a recruiter can actually file.
+   ============================================================ */
+@media print {
+  :root {
+    color-scheme: light;
+    --color-void: #ffffff;
+    --color-abyss: #ffffff;
+    --color-slate: #f3f3f1;
+    --color-shale: #d9d7d1;
+    --color-mist: #232323;
+    --color-haze: #575757;
+    --color-bone: #0d0d0d;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #232323;
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+
+  /* Screen-only furniture. */
+  header,
+  canvas,
+  video,
+  .skip-link,
+  .glass,
+  button[aria-controls='mobile-sheet'],
+  [class*='backdrop-blur'] {
+    display: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Hero surfaces are shader/canvas driven and render as empty boxes. */
+  section:first-of-type {
+    min-height: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+  li,
+  figure,
+  .portrait-frame {
+    break-inside: avoid;
+  }
+
+  /* Long lists (experience, credentials) may flow across pages. */
+  .section {
+    padding-block: 1.25rem;
+  }
+
+  a {
+    color: #0d0d0d;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* The contact block is the one place a printed URL is worth the ink. */
+  a[href^='mailto:']::after {
+    content: ' — ' attr(href);
+    text-decoration: none;
+    color: #575757;
+    font-size: 0.9em;
+  }
+}
