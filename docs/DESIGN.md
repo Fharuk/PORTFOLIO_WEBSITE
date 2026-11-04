@@ -131,8 +131,13 @@ Motion either answers an action or communicates space.
 
 ## Known gaps
 
-- No case-study routes; project cards do not link out except to Zenodo. Every
-  project already carries a `slug` for exactly this, and nothing serves it yet.
+- Case studies exist at `/work/[slug]` for all 29 records (26 projects and the
+  three P6 models), but only eight have long-form sections. The rest render
+  the record itself — metric, description, caveat — because inventing a
+  constraint and an approach for a build we have no material on would be
+  fabrication dressed as depth. Give the owner's words and they fill in.
+- No `/work` index page; the cards link to the individual studies and the
+  nav goes back to `/#work`.
 - No per-project OG images; one static `og.png` covers the whole site.
 - Credentials have no per-certificate verification links yet. The `verify`
   field exists on the `Credential` type and renders when set; it is populated

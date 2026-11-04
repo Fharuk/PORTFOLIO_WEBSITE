@@ -20,6 +20,7 @@ export type Project = {
 }
 
 export type P6Model = {
+  slug: string
   group: string
   title: string
   summary: string
@@ -131,6 +132,7 @@ export const site = {
   // ---- Primavera P6 planning models -------------------------------------
   p6: [
     {
+      slug: 'nigeria-offshore-wind',
       group: 'Offshore wind',
       title: 'Nigeria Offshore Wind Farm — Electrical Balance of Plant',
       summary:
@@ -144,6 +146,7 @@ export const site = {
       budget: 'US$450m',
     },
     {
+      slug: 'trans-delta-rehabilitation',
       group: 'Pipeline · rehabilitation',
       title: 'Trans-Delta 24-inch Export Pipeline Rehabilitation & Life Extension',
       summary:
@@ -157,6 +160,7 @@ export const site = {
       budget: 'US$60.6m',
     },
     {
+      slug: 'pipeline-replacement-10km',
       group: 'Pipeline · replacement',
       title: '24-inch Crude Oil Pipeline Replacement — 10 km',
       summary:

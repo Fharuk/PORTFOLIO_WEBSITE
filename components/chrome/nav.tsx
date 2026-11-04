@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'motion/react'
 import { site } from '@/content/site'
+import { p } from '@/lib/site-url'
 import { cn } from '@/lib/utils'
 
 const links = [
@@ -88,6 +89,15 @@ export function VariantSwitch({ compact }: { compact?: boolean }) {
 }
 
 export function Nav() {
+  const pathname = usePathname()
+  const current = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname
+
+  // The section anchors only exist on the three home routes. On a case-study
+  // page the same click has to travel back to the home page first — base path
+  // included — or it scrolls nowhere.
+  const onHome = VARIANTS.some((v) => v.href === current)
+  const sectionHref = (hash: string) => (onHome ? hash : `${p('/')}${hash}`)
+
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState('')
@@ -166,7 +176,7 @@ export function Nav() {
                 {links.map((l) => (
                   <li key={l.href}>
                     <a
-                      href={l.href}
+                      href={sectionHref(l.href)}
                       aria-current={active === l.href ? 'true' : undefined}
                       className={cn(
                         'relative block rounded-full px-3.5 py-1.5 text-[0.875rem] transition-colors duration-200',
@@ -245,7 +255,7 @@ export function Nav() {
                 {links.map((l) => (
                   <li key={l.href}>
                     <a
-                      href={l.href}
+                      href={sectionHref(l.href)}
                       onClick={() => setOpen(false)}
                       className="block rounded-2xl px-4 py-3 text-[1.3rem] text-[var(--color-bone)] transition-colors duration-150 hover:bg-[color-mix(in_oklab,var(--color-bone)_8%,transparent)]"
                       style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}

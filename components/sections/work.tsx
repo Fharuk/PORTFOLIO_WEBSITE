@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import Link from 'next/link'
 import { motion, AnimatePresence } from 'motion/react'
 import {
   projects,
@@ -59,7 +60,12 @@ function FeaturedCard({ project, large }: { project: Project; large?: boolean })
           )}
           style={{ fontFamily: 'var(--font-display)', fontWeight: 350 }}
         >
-          {project.title}
+          <Link
+            href={`/work/${project.slug}`}
+            className="transition-colors duration-200 hover:text-[var(--color-mist)]"
+          >
+            {project.title}
+          </Link>
         </h3>
         <p className="mt-3 max-w-[46ch] text-[0.9375rem] leading-relaxed text-[var(--color-haze)]">
           {project.desc}
@@ -68,14 +74,22 @@ function FeaturedCard({ project, large }: { project: Project; large?: boolean })
 
       <div className="relative mt-6 flex items-end justify-between gap-4">
         <span className="metric text-[0.9375rem]">{project.metric}</span>
-        {project.links?.[0] && (
-          <a
-            href={project.links[0].href}
+        <span className="flex items-center gap-4">
+          <Link
+            href={`/work/${project.slug}`}
             className="link text-[0.875rem] text-[var(--color-mist)]"
           >
-            {project.links[0].label}
-          </a>
-        )}
+            Case study
+          </Link>
+          {project.links?.[0] && (
+            <a
+              href={project.links[0].href}
+              className="text-[0.875rem] text-[var(--color-haze)] transition-colors duration-150 hover:text-[var(--color-mist)]"
+            >
+              {project.links[0].label} ↗
+            </a>
+          )}
+        </span>
       </div>
     </article>
   )
@@ -86,21 +100,34 @@ function CatalogueRow({ project }: { project: Project }) {
     <li className="border-t border-[color-mix(in_oklab,var(--color-shale)_60%,transparent)] py-4 last:border-b">
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
         <h3 className="text-[1.0625rem] leading-snug text-[var(--color-bone)]">
-          {project.title}
+          <Link
+            href={`/work/${project.slug}`}
+            className="transition-colors duration-200 hover:text-[var(--color-mist)]"
+          >
+            {project.title}
+          </Link>
         </h3>
         <span className="metric shrink-0 text-[0.8125rem]">{project.metric}</span>
       </div>
       <p className="mt-1.5 max-w-[68ch] text-[0.9rem] leading-relaxed text-[var(--color-haze)]">
         {project.desc}
       </p>
-      {project.links?.[0] && (
-        <a
-          href={project.links[0].href}
-          className="link mt-2 inline-block text-[0.8125rem] text-[var(--color-mist)]"
+      <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1">
+        <Link
+          href={`/work/${project.slug}`}
+          className="link text-[0.8125rem] text-[var(--color-mist)]"
         >
-          {project.links[0].label}
-        </a>
-      )}
+          Case study
+        </Link>
+        {project.links?.[0] && (
+          <a
+            href={project.links[0].href}
+            className="text-[0.8125rem] text-[var(--color-haze)] transition-colors duration-150 hover:text-[var(--color-mist)]"
+          >
+            {project.links[0].label} ↗
+          </a>
+        )}
+      </div>
     </li>
   )
 }
