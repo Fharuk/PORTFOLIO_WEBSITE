@@ -128,7 +128,9 @@ export function ChromeHero() {
             </div>
           </div>
 
-          <p className="max-w-[22ch] text-[0.875rem] leading-relaxed text-[var(--color-haze)] md:text-right">
+          <p className="max-w-[24ch] text-[0.875rem] leading-relaxed text-[var(--color-haze)] md:text-right">
+            <span className="text-[var(--color-mist)]">{site.studying}</span>
+            <br />
             {site.discipline}
           </p>
         </div>

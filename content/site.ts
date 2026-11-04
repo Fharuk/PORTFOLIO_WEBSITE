@@ -68,6 +68,11 @@ export const site = {
   // credential: "Dr." here is not a doctorate, and the site must not imply one.
   nickname: 'Dr. Archimedis',
   role: 'Electrical & Electronics Engineer',
+  // The master's is named separately from `discipline`: the hero slot that
+  // renders these is only about 22 characters wide, so one long credential
+  // string would wrap into a column of fragments. Both are rendered together,
+  // studies first, and "in progress" stays attached to the MScFE.
+  studying: 'MSc Financial Engineering · in progress',
   discipline: 'B.Eng. Electrical & Electronics Engineering · FUNAAB',
   location: 'Lagos, Nigeria',
   timezone: 'WAT · UTC+1',
@@ -81,7 +86,7 @@ export const site = {
     lead: 'Power systems.',
     mid: 'Applied intelligence.',
     tail: 'Delivery that holds.',
-    sub: 'Electrical & Electronics Engineering graduate from FUNAAB, working across energy, machine learning, software and project planning.',
+    sub: 'Electrical & Electronics Engineer from FUNAAB, working across energy, machine learning, software and project planning.',
   },
 
   about: [
@@ -277,12 +282,9 @@ export const site = {
     },
   ],
 
-  // Most recent first. The MScFE follows WorldQuant University's own naming
-  // and is marked in progress: enrolled is not the same claim as graduated, and
-  // a portfolio should never blur those two.
-  // Most recent first. Both the MScFE and the BBA are in progress and say so:
-  // enrolled is not the same claim as graduated, and a portfolio should never
-  // blur those two.
+  // Most recent first. The MScFE follows WorldQuant University's own naming.
+  // Both the MScFE and the BBA are in progress and say so: enrolled is not the
+  // same claim as graduated, and a portfolio should never blur those two.
   education: [
     {
       degree: 'MSc Financial Engineering',

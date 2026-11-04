@@ -35,6 +35,8 @@ export function About() {
                 known as {site.nickname}
               </p>
               <p className="mt-1 text-[0.875rem] leading-relaxed text-[var(--color-haze)]">
+                {site.studying}
+                <br />
                 {site.discipline}
                 <br />
                 {site.location}
