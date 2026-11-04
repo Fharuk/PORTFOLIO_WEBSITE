@@ -21,16 +21,20 @@ export function Experience() {
           <div>
             <dl className="m-0">
               <dt className="text-[0.8125rem] text-[var(--color-haze)]">Education</dt>
-              <dd className="m-0 mt-2">
-                <p className="text-[1.0625rem] leading-snug text-[var(--color-bone)]">
-                  {site.education.degree}
-                </p>
-                <p className="mt-1 max-w-[34ch] text-[0.875rem] leading-relaxed text-[var(--color-haze)]">
-                  {site.education.school}
-                </p>
-                <p className="tabular mt-1 text-[0.8125rem] text-[var(--color-haze)]">
-                  {site.education.date}
-                </p>
+              <dd className="m-0 mt-3 flex flex-col gap-4">
+                {site.education.map((e) => (
+                  <div key={e.degree}>
+                    <p className="text-[1.0625rem] leading-snug text-[var(--color-bone)]">
+                      {e.degree}
+                    </p>
+                    <p className="mt-1 max-w-[34ch] text-[0.875rem] leading-relaxed text-[var(--color-haze)]">
+                      {e.school}
+                    </p>
+                    <p className="tabular mt-1 text-[0.8125rem] text-[var(--color-haze)]">
+                      {e.date}
+                    </p>
+                  </div>
+                ))}
               </dd>
             </dl>
 

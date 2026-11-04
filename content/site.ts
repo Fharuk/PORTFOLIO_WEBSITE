@@ -34,6 +34,12 @@ export type ResearchRecord = {
   href: string
 }
 
+export type EducationEntry = {
+  degree: string
+  school: string
+  date: string
+}
+
 export type Role = {
   period: string
   title: string
@@ -236,11 +242,21 @@ export const site = {
     },
   ],
 
-  education: {
-    degree: 'B.Eng. Electrical & Electronics Engineering',
-    school: 'Federal University of Agriculture, Abeokuta (FUNAAB)',
-    date: 'July 2025',
-  },
+  // Most recent first. The MScFE follows WorldQuant University's own naming
+  // and is marked in progress: enrolled is not the same claim as graduated, and
+  // a portfolio should never blur those two.
+  education: [
+    {
+      degree: 'MSc Financial Engineering',
+      school: 'WorldQuant University',
+      date: 'In progress',
+    },
+    {
+      degree: 'B.Eng. Electrical & Electronics Engineering',
+      school: 'Federal University of Agriculture, Abeokuta (FUNAAB)',
+      date: 'July 2025',
+    },
+  ] as EducationEntry[],
 
   credentials: {
     'Project & leadership': [
