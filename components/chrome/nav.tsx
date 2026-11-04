@@ -44,6 +44,13 @@ export function VariantSwitch({ compact }: { compact?: boolean }) {
   // normalising, the active pill silently never appears on the Pages copy.
   const current = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname
 
+  // Two switches can be mounted at once: the header one shows from md up, and
+  // the sheet one shows below lg, so between 768px and 1024px an open menu
+  // puts both on the page. Sharing a layoutId would make Motion treat them as
+  // one element and fly the pill from the header into the sheet, so each
+  // instance gets its own id.
+  const pillId = compact ? 'variant-pill-sheet' : 'variant-pill-header'
+
   return (
     <div
       className={cn(
@@ -67,7 +74,7 @@ export function VariantSwitch({ compact }: { compact?: boolean }) {
           >
             {active && (
               <motion.span
-                layoutId="variant-pill"
+                layoutId={pillId}
                 className="absolute inset-0 rounded-full bg-[var(--color-bone)]"
                 transition={{ type: 'spring', stiffness: 420, damping: 34 }}
               />
