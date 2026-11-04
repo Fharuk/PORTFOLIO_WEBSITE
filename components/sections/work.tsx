@@ -148,11 +148,19 @@ export function Work() {
           <h2 id="work-heading" className="h2">
             Selected work
           </h2>
-          <p className="text-[0.975rem] leading-relaxed text-[var(--color-haze)] md:justify-self-end md:max-w-[44ch] md:text-right">
-            Five that show the range, then all {projects.length}. Each result is
-            the metric reported in the project materials — simulation and
-            prototype figures, not field performance.
-          </p>
+          <div className="md:justify-self-end md:text-right">
+            <p className="text-[0.975rem] leading-relaxed text-[var(--color-haze)] md:max-w-[44ch]">
+              Five that show the range, then all {projects.length}. Each result is
+              the metric reported in the project materials — simulation and
+              prototype figures, not field performance.
+            </p>
+            <Link
+              href="/work"
+              className="link mt-3 inline-block text-[0.9375rem] text-[var(--color-bone)]"
+            >
+              All {projects.length + 3} records, with case studies →
+            </Link>
+          </div>
         </div>
 
         {/* Featured — an asymmetric grid, not five identical cards */}

@@ -196,6 +196,18 @@ export function Nav() {
                     </a>
                   </li>
                 ))}
+                <li className="ml-0.5">
+                  <Link
+                    href="/cv"
+                    aria-current={current === '/cv' ? 'page' : undefined}
+                    className={cn(
+                      'relative block rounded-full px-3.5 py-1.5 text-[0.875rem] transition-colors duration-200',
+                      'text-[var(--color-mist)] hover:text-[var(--color-bone)]',
+                    )}
+                  >
+                    CV
+                  </Link>
+                </li>
               </ul>
             </nav>
 
@@ -262,6 +274,21 @@ export function Nav() {
                     >
                       {l.label}
                     </a>
+                  </li>
+                ))}
+                {[
+                  { href: '/work', label: 'All work' },
+                  { href: '/cv', label: 'CV' },
+                ].map((l) => (
+                  <li key={l.href}>
+                    <Link
+                      href={l.href}
+                      onClick={() => setOpen(false)}
+                      className="block rounded-2xl px-4 py-3 text-[1.3rem] text-[var(--color-bone)] transition-colors duration-150 hover:bg-[color-mix(in_oklab,var(--color-bone)_8%,transparent)]"
+                      style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
+                    >
+                      {l.label}
+                    </Link>
                   </li>
                 ))}
               </ul>

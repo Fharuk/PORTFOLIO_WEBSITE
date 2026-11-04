@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "og": "node scripts/make-og.mjs"
+    "og": "node scripts/make-og.mjs",
+    "cv": "node --experimental-strip-types --loader ./scripts/ts-resolve.mjs scripts/make-cv.mjs"
   },
   "dependencies": {
     "@fontsource-variable/bricolage-grotesque": "^5.3.0",
@@ -35,6 +36,7 @@
     "@types/three": "^0.180.0",
     "eslint": "^9.39.5",
     "eslint-config-next": "^15.5.28",
+    "pdfkit": "^0.17.2",
     "tailwindcss": "^4.3.3",
     "typescript": "^5"
   },

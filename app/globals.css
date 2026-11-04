@@ -416,6 +416,39 @@ button {
 }
 
 /* ============================================================
+   CV
+
+   The one page on the site that is a document rather than an
+   experience. Two columns on screen — a rail of facts that stays
+   put, a body that scrolls — collapsing to a single column on
+   paper. No shader, no glass: a CV should read as paper from the
+   first frame.
+   ============================================================ */
+.cv-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2.5rem, 5vw, 3.5rem);
+  align-items: start;
+}
+
+@media (min-width: 60rem) {
+  .cv-grid {
+    grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+    gap: clamp(3rem, 6vw, 5.5rem);
+  }
+
+  .cv-rail {
+    position: sticky;
+    top: 7rem;
+  }
+}
+
+/* Keeps the reading column honest at very wide widths. */
+.cv-body {
+  max-width: 46rem;
+}
+
+/* ============================================================
    Print
 
    The page is built for a dark screen: a white-on-black glass
@@ -445,8 +478,9 @@ button {
     line-height: 1.45;
   }
 
-  /* Screen-only furniture. */
-  header,
+  /* Screen-only furniture. The CV's rail is a <header> too, and it is the
+     one header that must survive printing — it holds the name and contact. */
+  header:not(.cv-rail),
   canvas,
   video,
   .skip-link,
@@ -500,5 +534,59 @@ button {
     text-decoration: none;
     color: #575757;
     font-size: 0.9em;
+  }
+
+  /* ---- CV ----------------------------------------------------- */
+  @page {
+    size: A4;
+    margin: 15mm 16mm 14mm;
+  }
+
+  .cv {
+    padding-top: 0 !important;
+  }
+
+  .cv-grid {
+    display: block !important;
+  }
+
+  .cv-rail {
+    position: static !important;
+    margin-bottom: 1.5rem;
+  }
+
+  .cv-body {
+    max-width: none;
+  }
+
+  /* Controls and status that mean nothing on paper. */
+  .cv-hide-print,
+  .cv-verify {
+    display: none !important;
+  }
+
+  .cv-entry,
+  .cv li {
+    break-inside: avoid;
+  }
+
+  /* The email is already printed as text; no need to repeat the scheme. */
+  .cv-rail a[href^='mailto:']::after {
+    content: none;
+  }
+
+  .cv h1 {
+    font-size: 20pt;
+    line-height: 1.05;
+  }
+
+  .cv h2 {
+    font-size: 8.5pt;
+    letter-spacing: 0.14em;
+  }
+
+  .cv p,
+  .cv li {
+    font-size: 9.4pt;
   }
 }

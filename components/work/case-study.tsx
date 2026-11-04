@@ -43,7 +43,7 @@ export function CaseStudyView({ study }: { study: CaseStudy }) {
         <article className="section pt-[clamp(5rem,12vw,8rem)]">
           <div className="shell">
             <Link
-              href="/#work"
+              href="/work"
               className="link inline-flex items-center gap-2 text-[0.875rem] text-[var(--color-haze)] transition-colors duration-150 hover:text-[var(--color-bone)]"
             >
               <span aria-hidden="true">←</span> All work

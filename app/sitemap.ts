@@ -24,6 +24,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absolute('/'), lastModified, changeFrequency: 'monthly', priority: 1 },
     { url: absolute('/chrome'), lastModified, changeFrequency: 'monthly', priority: 0.6 },
     { url: absolute('/energy'), lastModified, changeFrequency: 'monthly', priority: 0.6 },
+    { url: absolute('/work'), lastModified, changeFrequency: 'monthly', priority: 0.8 },
+    { url: absolute('/cv'), lastModified, changeFrequency: 'yearly', priority: 0.9 },
     ...studies,
   ]
 }
