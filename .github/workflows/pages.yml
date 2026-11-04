@@ -51,6 +51,12 @@ jobs:
           # back to localhost on this host and the share card points nowhere.
           NEXT_PUBLIC_SITE_URL: https://fharuk.github.io
 
+      # Guard rail, not a formality: this fails the deploy rather than letting
+      # a dependency quietly add weight to every page. Budgets live in
+      # scripts/check-budget.mjs and are set just above today's numbers.
+      - name: Performance budget
+        run: npm run budget
+
       - uses: actions/upload-pages-artifact@v5
         with:
           path: out

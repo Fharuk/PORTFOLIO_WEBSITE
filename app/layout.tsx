@@ -4,6 +4,7 @@ import '@fontsource-variable/instrument-sans/standard.css'
 import './globals.css'
 import { Nav } from '@/components/chrome/nav'
 import { SmoothScroll } from '@/components/chrome/smooth-scroll'
+import { Telemetry } from '@/components/chrome/telemetry'
 import { site } from '@/content/site'
 import { siteTitle, siteDescription } from '@/lib/metadata'
 import { jsonLd } from '@/lib/jsonld'
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SmoothScroll />
         <Nav />
         {children}
+        <Telemetry />
       </body>
     </html>
   )

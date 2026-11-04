@@ -126,8 +126,22 @@ Motion either answers an action or communicates space.
 - The chrome environment is baked once (`frames={1}`) — it never changes, so
   re-rendering it every frame would be waste.
 - `dpr` capped at 1.75 (1.6 for 3D, 1.25 on coarse pointers).
-- Static prerender. First-load JS: 184 kB (`/`), 187 kB (`/chrome`), 185 kB
-  (`/energy`).
+- Static prerender. First-load JS: 189 kB (`/`), 191 kB (`/chrome`), 189 kB
+  (`/energy`), 107 kB on `/cv`, `/work` and the case studies.
+- `npm run budget` measures the built HTML — every script and stylesheet the
+  browser is actually told to fetch, deduplicated per route and gzipped — and
+  fails if any route crosses the limits in `scripts/check-budget.mjs`. It runs
+  in the Pages workflow, before the artifact is uploaded, so a dependency that
+  taxes every page cannot reach production quietly.
+  - Today: 197 kB JS (budget 200), 13.5 kB CSS (32), 24.7 kB HTML (130).
+  - `noModule` scripts are excluded: the polyfill bundle is a tax on browsers
+    nobody reads this on.
+  - The budgets are a ratchet at roughly today's numbers. Raising one is a
+    one-line edit — the point is that it is a reviewed edit, not a discovery.
+- Measurement: `@vercel/analytics` (production mode only, so preview aliases do
+  not pollute the numbers) and `@vercel/speed-insights`, both gated on the
+  build environment. They render on Vercel, where the `/_vercel/insights/*`
+  scripts exist, and not on Pages, where they would 404.
 
 ## Known gaps
 
@@ -142,9 +156,9 @@ Motion either answers an action or communicates space.
   PDF after any content edit — nothing else in the repo can produce it, and
   a stale PDF is worse than none.
 - No per-project OG images; one static `og.png` covers the whole site.
-- Credentials have no per-certificate verification links yet. The `verify`
-  field exists on the `Credential` type and renders when set; it is populated
-  only from links the issuer generated, never guessed.
+- 19 of the 36 credentials still have no verification link. The other 17 do;
+  the `verify` field renders only from a URL the issuer actually generated,
+  because a verification link that fails to verify is worse than no link.
 - Contact is copy-to-clipboard plus `tel:` and `mailto:` — no form, because a
   form needs a service and a spam answer before it is worth shipping.
 - `@shadergradient/react` was evaluated and removed. It works (the library needs
