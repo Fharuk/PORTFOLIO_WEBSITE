@@ -205,6 +205,10 @@ export const site = {
     'Research records, not peer-reviewed publications. Figures refer to the reported datasets and simulations, not validated field outcomes.',
 
   // ---- Experience ------------------------------------------------------
+  // Newest first, so the column reads as one timeline: the roles still running
+  // lead (longest-running first), then every completed role in the order it
+  // ended. Editing this list means re-sorting by hand — the dates are strings
+  // ("present", "Sep 2020") and parsing them at runtime would buy nothing.
   experience: [
     {
       period: 'Sep 2020 — present',
