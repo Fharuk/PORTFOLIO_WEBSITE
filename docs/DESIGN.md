@@ -136,8 +136,11 @@ Motion either answers an action or communicates space.
   the record itself — metric, description, caveat — because inventing a
   constraint and an approach for a build we have no material on would be
   fabrication dressed as depth. Give the owner's words and they fill in.
-- No `/work` index page; the cards link to the individual studies and the
-  nav goes back to `/#work`.
+- The CV exists in two forms generated from one source (`content/cv.ts`):
+  `/cv` for the screen and `public/cv/akinmade-faruq-adeoye-cv.pdf` for the
+  file a recruiter attaches to an application. `npm run cv` regenerates the
+  PDF after any content edit — nothing else in the repo can produce it, and
+  a stale PDF is worse than none.
 - No per-project OG images; one static `og.png` covers the whole site.
 - Credentials have no per-certificate verification links yet. The `verify`
   field exists on the `Credential` type and renders when set; it is populated
