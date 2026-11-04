@@ -314,12 +314,32 @@ export const site = {
     },
   ] as EducationEntry[],
 
+  // Every `verify` URL below was opened and read back before it was written
+  // here: the title, issuer and date on the page are what the entry claims.
+  // Where a record did not resolve, no link is set — a dead verification link
+  // is worse than none.
   credentials: {
     'Project & leadership': [
-      { title: 'Google Project Management Professional Certificate', issuer: 'Google / Coursera · 7 courses · Oct 2026' },
-      { title: 'Project Planning: Putting It All Together', issuer: 'Google / Coursera · Oct 2026' },
-      { title: 'Project Initiation: Starting a Successful Project', issuer: 'Google / Coursera · Oct 2026' },
-      { title: 'Microsoft Project Management', issuer: 'Microsoft / Coursera · Sep 2025' },
+      {
+        title: 'Google Project Management Professional Certificate',
+        issuer: 'Google / Coursera · 7 courses · Oct 2026',
+        verify: 'https://www.credly.com/badges/f49890ce-74c7-4a1b-a417-04a17aecd270/public_url',
+      },
+      {
+        title: 'Project Planning: Putting It All Together',
+        issuer: 'Google / Coursera · Oct 2026',
+        verify: 'https://www.coursera.org/account/accomplishments/verify/O9ENY070O7RX',
+      },
+      {
+        title: 'Project Initiation: Starting a Successful Project',
+        issuer: 'Google / Coursera · Oct 2026',
+        verify: 'https://www.coursera.org/account/accomplishments/verify/3F6246IXJ47Q',
+      },
+      {
+        title: 'Microsoft Project Management: Build Job-Ready Skills',
+        issuer: 'Microsoft / Coursera · Sep 2025',
+        verify: 'https://www.coursera.org/account/accomplishments/specialization/P5PG13KDB5YU',
+      },
       { title: 'Project Engineering Management Training Programme for Engineering Graduates', issuer: 'NCDMB with Elevated Express Limited · Lagos · Oct 2026' },
       { title: 'Aspire Leaders Program', issuer: 'Aspire Institute · 40 hours · Dec 2025' },
       { title: 'Security Risk Management Professional – Country (SRMP-C)', issuer: 'INSSA · May 2024 · 3-year validity stated' },
@@ -332,33 +352,85 @@ export const site = {
     'Engineering & energy': [
       { title: 'IoT Wireless & Cloud Computing Emerging Technologies', issuer: 'Yonsei University / Coursera · Jun 2025' },
       { title: 'Energy Access and Just Transition', issuer: 'Green Hub Africa · Jul 2025' },
-      { title: 'Complete Course in AutoCAD: 2D and 3D', issuer: 'CADCIM Technologies / Udemy · Jan 2024' },
-      { title: 'Electronics Mastery: The Beginner’s Course in Electronics', issuer: 'Lab Awesome / Udemy · Jan 2024' },
+      {
+        title: 'Complete Course in AutoCAD: 2D and 3D',
+        issuer: 'CADCIM Technologies / Udemy · Jun 2024',
+        verify: 'https://www.udemy.com/certificate/UC-a9967c42-b093-411e-9f4a-5e18caa00a3b/',
+      },
+      {
+        title: 'Electronics Mastery: The Beginner’s Course in Electronics',
+        issuer: 'Lab Awesome / Udemy · Jun 2024',
+        verify: 'https://www.udemy.com/certificate/UC-ad7d88cb-17ae-42a3-9815-b609f7d743d1/',
+      },
     ] as Credential[],
     'Data & AI': [
-      { title: 'IBM Data Science Professional Certificate', issuer: 'IBM / Coursera · 12 courses · Aug 2025' },
+      {
+        title: 'IBM Data Science Professional Certificate',
+        issuer: 'IBM / Coursera · 12 courses · Aug 2025',
+        verify: 'https://www.coursera.org/account/accomplishments/specialization/ANTIF5ILAP1N',
+      },
       { title: 'Applied Data Science Lab', issuer: 'WorldQuant University · Aug 2025' },
-      { title: 'Microsoft Python Development', issuer: 'Microsoft / Coursera · Sep 2025' },
-      { title: 'Data Science Essentials with Python', issuer: 'Cisco · Sep 2025' },
-      { title: '5-Day AI Agents Intensive Course with Google', issuer: 'Kaggle · Dec 2025' },
+      {
+        title: 'Microsoft Python Development',
+        issuer: 'Microsoft / Coursera · Sep 2025',
+        verify: 'https://www.coursera.org/account/accomplishments/specialization/L824QT8XAWEE',
+      },
+      {
+        title: 'Data Science Essentials with Python',
+        issuer: 'Cisco · Sep 2025',
+        verify: 'https://www.credly.com/badges/07241441-feb7-48fc-983b-93273d212339/public_url',
+      },
+      {
+        title: '5-Day AI Agents Intensive Course with Google',
+        issuer: 'Kaggle · Dec 2025',
+        verify: 'https://www.kaggle.com/certification/badges/faruqakinmade/105',
+      },
       { title: 'Ethics of AI', issuer: 'University of Helsinki · 2 ECTS · Jul 2025' },
-      { title: 'Data Literacy — What Is It and Why Does It Matter?', issuer: '4EU+ Alliance / Coursera · Jul 2025' },
-      { title: 'Excel Fundamentals for Data Analysis', issuer: 'Macquarie University / Coursera · Jul 2025' },
+      {
+        title: 'Data Literacy — What Is It and Why Does It Matter?',
+        issuer: '4EU+ Alliance / Coursera · Jul 2025',
+        verify: 'https://www.coursera.org/account/accomplishments/verify/2VIOAY4HJLTU',
+      },
+      {
+        title: 'Excel Fundamentals for Data Analysis',
+        issuer: 'Macquarie University / Coursera · Jul 2025',
+        verify: 'https://www.coursera.org/account/accomplishments/verify/CL5Q81SOJET1',
+      },
       { title: 'What Is Data Science?', issuer: 'IBM / Coursera · Jul 2025' },
       { title: 'What Is Generative AI?', issuer: 'LinkedIn Learning · Jun 2025' },
-      { title: 'Basic Information Literacy', issuer: 'Coursera · Jun 2025' },
+      {
+        title: 'Basic Information Literacy',
+        issuer: 'University at Buffalo / Coursera · Jun 2025',
+        verify: 'https://www.credly.com/badges/23019061-c528-49ef-b7d3-adec3c42e93d/public_url',
+      },
     ] as Credential[],
     'IT & software': [
-      { title: 'IBM IT Support Professional Certificate', issuer: 'IBM / Coursera · 9 courses · Jan 2025' },
-      { title: 'Microsoft IT Support Specialist Professional Certificate', issuer: 'Microsoft / Coursera · 6 courses · Jan 2025' },
-      { title: 'Dell Technologies Technical Customer Support Specialist', issuer: 'Dell Technologies / Coursera · 5 courses · Jan 2025' },
+      {
+        title: 'IBM IT Support Professional Certificate',
+        issuer: 'IBM / Coursera · 9 courses · Aug 2025',
+        verify: 'https://www.coursera.org/account/accomplishments/professional-cert/2854SZHKQDWG',
+      },
+      {
+        title: 'Microsoft IT Support Specialist Professional Certificate',
+        issuer: 'Microsoft / Coursera · 6 courses · Aug 2025',
+        verify: 'https://www.coursera.org/account/accomplishments/professional-cert/8C5NN09PK77Q',
+      },
+      {
+        title: 'Dell Technologies Technical Customer Support Specialist',
+        issuer: 'Dell Technologies / Coursera · 5 courses · Aug 2025',
+        verify: 'https://www.coursera.org/account/accomplishments/professional-cert/Q0IJCAH3P1GO',
+      },
       { title: 'Microsoft 365 Ultimate Guide', issuer: 'Udemy · 22.5 hours · Jun 2024' },
     ] as Credential[],
     'Education & communication': [
       { title: 'Teaching English as a Foreign Language (TEFL)', issuer: 'Teacher Record · 120 hours · Distinction · Jun 2024' },
       { title: 'Jobberman Soft-Skills Training', issuer: 'Jobberman / Propel · Jun 2025' },
       { title: 'Mentorship Principles', issuer: 'North American Division Leadership Certification · Jun 2024' },
-      { title: 'EF SET English Certificate 56/100 (B2 Upper Intermediate)', issuer: 'EF SET · Jun 2026' },
+      {
+        title: 'EF SET English Certificate 56/100 (B2 Upper Intermediate)',
+        issuer: 'EF SET · Jun 2026',
+        verify: 'https://cert.efset.org/en/CmQcu8',
+      },
       { title: 'The Fundamentals of Digital Marketing', issuer: 'Google Digital Skills for Africa · May 2022' },
     ] as Credential[],
   },

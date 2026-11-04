@@ -101,9 +101,10 @@ export function Credentials() {
             <h2 id="credentials-heading" className="h2">
               Learning, on record
             </h2>
-            <p className="mt-3 text-[0.875rem] text-[var(--color-haze)]">
+            <p className="mt-3 max-w-[62ch] text-[0.875rem] leading-relaxed text-[var(--color-haze)]">
               {total} certificates and training records, grouped by what they are
-              for. Dates and issuers are as listed on{' '}
+              for. Where the issuer publishes a public record, the entry links
+              straight to it; the rest are as listed on{' '}
               <a
                 href="https://www.linkedin.com/in/faruqakinmade/details/certifications/"
                 target="_blank"
@@ -112,7 +113,7 @@ export function Credentials() {
               >
                 LinkedIn
               </a>
-              , where each one can be checked.
+              .
             </p>
           </div>
         </div>
