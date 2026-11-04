@@ -9,6 +9,7 @@ import {
   cvVerifiedCount,
   credentialIssuer,
   credentialYear,
+  doiFor,
 } from '@/content/cv'
 import { caseStudies } from '@/content/case-studies'
 import { site } from '@/content/site'
@@ -57,6 +58,7 @@ function Entry({
   period,
   meta,
   body,
+  note,
   href,
   metaAccent = false,
 }: {
@@ -64,6 +66,8 @@ function Entry({
   period?: string
   meta?: string
   body?: string
+  /** A short identifier under the entry — a DOI, for the research records. */
+  note?: string
   href?: string
   metaAccent?: boolean
 }) {
@@ -100,6 +104,9 @@ function Entry({
         <p className="mt-1.5 max-w-[62ch] text-[0.9rem] leading-relaxed text-[var(--color-haze)]">
           {body}
         </p>
+      )}
+      {note && (
+        <p className="tabular mt-1 text-[0.75rem] text-[var(--color-haze)] opacity-80">{note}</p>
       )}
     </li>
   )
@@ -222,6 +229,7 @@ export function CvDocument() {
                     title={record.title}
                     meta={record.method}
                     body={record.finding}
+                    note={doiFor(record) ? `DOI ${doiFor(record)}` : undefined}
                     href={studyFor(record.href) ? `/work/${studyFor(record.href)}` : undefined}
                   />
                 ))}

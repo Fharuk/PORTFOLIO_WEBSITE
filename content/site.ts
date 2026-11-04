@@ -103,6 +103,41 @@ export const site = {
     'I work in Nigerian contexts with global tools. Access and transition are not abstractions to me — they are the conditions the work has to function in.',
   ],
 
+  /**
+   * What the work is actually made of.
+   *
+   * Every entry here appears in the project records or the papers — no
+   * aspirational additions, nothing learned once and abandoned. The groupings
+   * follow the disciplines rather than a job-board taxonomy, so the list reads
+   * as a toolkit instead of a checklist.
+   */
+  stack: [
+    {
+      group: 'Electrical & control',
+      items: ['MATLAB', 'Simulink', 'PID & state-space control', 'Power-system analysis', 'Digital twins', 'PCB & breadboard prototyping'],
+    },
+    {
+      group: 'Machine learning',
+      items: ['PyTorch', 'TensorFlow', 'scikit-learn', 'NumPy', 'Pandas', 'SHAP', 'XGBoost', 'Stable-Baselines3', 'Gymnasium'],
+    },
+    {
+      group: 'Applied AI',
+      items: ['Gemini 2.5 Flash', 'Vision & multimodal agents', 'RAG', 'Google AI Studio', 'Hugging Face'],
+    },
+    {
+      group: 'Software & delivery',
+      items: ['Python', 'Streamlit', 'Flask / REST', 'TypeScript / React', 'Next.js', 'Tailwind', 'Docker', 'Google Cloud Run', 'Git & GitHub Actions'],
+    },
+    {
+      group: 'Hardware & edge',
+      items: ['Arduino', 'ESP32', 'Embedded C++', 'Sensor interfacing', 'TinyML'],
+    },
+    {
+      group: 'Planning',
+      items: ['Primavera P6', 'Schedule logic & resource loading', 'Risk registers'],
+    },
+  ],
+
   principle:
     'Build with technical depth. Explain with clarity. Keep the human context in view.',
 
@@ -181,9 +216,9 @@ export const site = {
   // ---- Research records ------------------------------------------------
   research: [
     {
-      title: 'Physics-Informed Domain Adaptation for Industrial Fault Diagnosis',
-      method: 'Digital twin + 1D-CNN · CWRU bearing dataset',
-      finding: '100% precision and recall reported in the project record',
+      title: 'Riemannian Transfer Learning for Cross-Subject BCI',
+      method: 'Euclidean alignment + SimCLR pre-training',
+      finding: '79.3% accuracy and 0.27 ms inference latency reported',
       href: 'https://zenodo.org/records/18714046',
     },
     {
@@ -205,9 +240,9 @@ export const site = {
       href: 'https://zenodo.org/records/18794753',
     },
     {
-      title: 'Riemannian Transfer Learning for Cross-Subject BCI',
-      method: 'Euclidean alignment + SimCLR pre-training',
-      finding: '79.3% accuracy and 0.27 ms inference latency reported',
+      title: 'Physics-Informed Domain Adaptation for Industrial Fault Diagnosis',
+      method: 'Digital twin + 1D-CNN · CWRU bearing dataset',
+      finding: '100% precision and recall reported in the project record',
       href: 'https://zenodo.org/records/18794765',
     },
   ] as ResearchRecord[],
@@ -446,6 +481,11 @@ export const site = {
     links: [
       { label: 'LinkedIn', href: 'https://www.linkedin.com/in/faruqakinmade' },
       { label: 'GitHub', href: 'https://github.com/Fharuk' },
+      // Opened and read back before being listed. Credly is the one address
+      // that verifies every badge in the credentials list at once; Kaggle
+      // carries the notebooks behind the models.
+      { label: 'Credly', href: 'https://www.credly.com/users/faruq-akinmade' },
+      { label: 'Kaggle', href: 'https://www.kaggle.com/faruqakinmade' },
       { label: 'Earlier portfolio', href: 'https://fharuk.github.io/portfolio/' },
     ],
   },
@@ -466,29 +506,29 @@ export const projects: Project[] = [
   { slug: 'active-vibration-control', category: 'engineering', title: 'Autonomous Active Vibration Control', metric: '40% lower settling time', desc: 'A Soft Actor-Critic agent tunes PID gains in a nonlinear system, with a reported 17% efficiency gain over Ziegler–Nichols control.', links: [{ label: 'Research record', href: 'https://zenodo.org/records/18794732' }] },
 
   // ai
-  { slug: 'energy-grid-agent', category: 'ai', title: 'Autonomous Energy Grid Agent', metric: '5.5% simulated cost savings', desc: 'PPO agent optimising battery discharge in a renewable microgrid simulator, compared against standard simulated controllers.' },
-  { slug: 'infrastructure-sentinel', category: 'ai', title: 'Municipal Infrastructure Sentinel', metric: 'Multi-agent prototype', desc: 'Vision verification and geospatial prioritisation to triage city infrastructure reports, using Gemini 2.5 Flash and Folium.' },
-  { slug: 'naija-legal-aid', category: 'ai', title: 'Naija Legal Aid', metric: 'Pidgin voice interface', desc: 'Voice-first prototype turning Nigerian Pidgin requests into draft legal-demand documents. A demonstration tool, not legal advice.' },
-  { slug: 'naija-marketsense', category: 'ai', title: 'Naija MarketSense', metric: 'Multimodal SME assistant', desc: 'Voice-driven prototype visualising market-price spreads and potential arbitrage for Nigerian SMEs.' },
-  { slug: 'breast-cancer-classifier', category: 'ai', title: 'Explainable Breast Cancer Classifier', metric: '98.2% reported accuracy', desc: 'SVM with SHAP explanations on a 30-feature dataset. An educational ML prototype, not a diagnostic device.' },
-  { slug: 'disease-prediction', category: 'ai', title: 'Disease Prediction System', metric: '41 classes', desc: 'Multiclass prototype with bulk CSV input and per-class F1 monitoring; not intended for clinical decisions.' },
-  { slug: 'heart-disease-risk', category: 'ai', title: 'Heart-Disease Risk Model', metric: 'Stacked ensemble', desc: 'Logistic regression and XGBoost combined for an educational risk-model demonstration.' },
-  { slug: 'crop-recommendation', category: 'ai', title: 'Crop Recommendation System', metric: 'Agritech prototype', desc: 'Soil N-P-K inputs to explore crop recommendation for Nigerian agricultural contexts.' },
-  { slug: 'sms-spam-detection', category: 'ai', title: 'SMS Spam Detection Engine', metric: 'F1 reported as 0.99', desc: 'TF-IDF, Random Forest and SMOTE pipeline with bulk CSV analysis and feature-importance visualisation.' },
+  { slug: 'energy-grid-agent', category: 'ai', title: 'Autonomous Energy Grid Agent', metric: '5.5% simulated cost savings', desc: 'PPO agent optimising battery discharge in a renewable microgrid simulator, compared against standard simulated controllers.' , links: [{ label: 'Live demo', href: 'https://autonomous-energy-grid-xh2lvsj9lnitmvmqvruq94.streamlit.app/' }, { label: 'Code', href: 'https://github.com/Fharuk/autonomous-energy-grid' }] },
+  { slug: 'infrastructure-sentinel', category: 'ai', title: 'Municipal Infrastructure Sentinel', metric: 'Multi-agent prototype', desc: 'Vision verification and geospatial prioritisation to triage city infrastructure reports, using Gemini 2.5 Flash and Folium.' , links: [{ label: 'Live demo', href: 'https://the-municipal-infrastructure-sentinel-askk6sxrharks3db8woukr.streamlit.app/' }, { label: 'Code', href: 'https://github.com/Fharuk/The-Municipal-Infrastructure-Sentinel' }] },
+  { slug: 'naija-legal-aid', category: 'ai', title: 'Naija Legal Aid', metric: 'Pidgin voice interface', desc: 'Voice-first prototype turning Nigerian Pidgin requests into draft legal-demand documents. A demonstration tool, not legal advice.' , links: [{ label: 'Live demo', href: 'https://naija-legal-aid-bnwwrslbvyi8rmtpnsqhye.streamlit.app/' }, { label: 'Code', href: 'https://github.com/Fharuk/Naija-Legal-Aid' }] },
+  { slug: 'naija-marketsense', category: 'ai', title: 'Naija MarketSense', metric: 'Multimodal SME assistant', desc: 'Voice-driven prototype visualising market-price spreads and potential arbitrage for Nigerian SMEs.' , links: [{ label: 'Live demo', href: 'https://naija-marketsense-sznpezycdvs2oxsv2nnnjd.streamlit.app/' }, { label: 'Code', href: 'https://github.com/Fharuk/Naija-MarketSense' }] },
+  { slug: 'breast-cancer-classifier', category: 'ai', title: 'Explainable Breast Cancer Classifier', metric: '98.2% reported accuracy', desc: 'SVM with SHAP explanations on a 30-feature dataset. An educational ML prototype, not a diagnostic device.' , links: [{ label: 'Live demo', href: 'https://breast-cancer-app-5zisoqlcrmb62xfx2vw7jh.streamlit.app' }, { label: 'Code', href: 'https://github.com/Fharuk/breast-cancer-app' }] },
+  { slug: 'disease-prediction', category: 'ai', title: 'Disease Prediction System', metric: '41 classes', desc: 'Multiclass prototype with bulk CSV input and per-class F1 monitoring; not intended for clinical decisions.' , links: [{ label: 'Live demo', href: 'https://disease-prediction-app-zn8mic7nrxuerpwxvuzglh.streamlit.app' }, { label: 'Code', href: 'https://github.com/Fharuk/disease-prediction-app' }] },
+  { slug: 'heart-disease-risk', category: 'ai', title: 'Heart-Disease Risk Model', metric: 'Stacked ensemble', desc: 'Logistic regression and XGBoost combined for an educational risk-model demonstration.' , links: [{ label: 'Live demo', href: 'https://heart-disease-predictor-atx8csvrdglknzmp28hfay.streamlit.app' }, { label: 'Code', href: 'https://github.com/Fharuk/heart-disease-predictor' }] },
+  { slug: 'crop-recommendation', category: 'ai', title: 'Crop Recommendation System', metric: 'Agritech prototype', desc: 'Soil N-P-K inputs to explore crop recommendation for Nigerian agricultural contexts.' , links: [{ label: 'Live demo', href: 'https://intelligent-crop-recommendation-system.streamlit.app' }, { label: 'Code', href: 'https://github.com/Fharuk/Intelligent-Crop-Recommendation-System' }] },
+  { slug: 'sms-spam-detection', category: 'ai', title: 'SMS Spam Detection Engine', metric: 'F1 reported as 0.99', desc: 'TF-IDF, Random Forest and SMOTE pipeline with bulk CSV analysis and feature-importance visualisation.' , links: [{ label: 'Live demo', href: 'https://spam-sms-detector-anqt8p2whl9vzfccsa7xrp.streamlit.app' }, { label: 'Code', href: 'https://github.com/Fharuk/spam-sms-detector' }] },
 
   // software
-  { slug: 'wifi-auditor', category: 'software', title: 'WiFi Performance Auditor', metric: 'Event-driven dashboard', desc: 'Bandwidth and latency monitoring dashboard for performance trends and SLA indicators.' },
-  { slug: 'credential-leak-auditor', category: 'software', title: 'Credential Leak Auditor', metric: 'Security prototype', desc: 'Audits employee email lists against a mock breach-check API and presents risk by department.' },
+  { slug: 'wifi-auditor', category: 'software', title: 'WiFi Performance Auditor', metric: 'Event-driven dashboard', desc: 'Bandwidth and latency monitoring dashboard for performance trends and SLA indicators.' , links: [{ label: 'Live demo', href: 'https://wifi-dashboard-fgavfog3iwlm3s25iwnpjd.streamlit.app' }, { label: 'Code', href: 'https://github.com/Fharuk/WiFi-Dashboard' }] },
+  { slug: 'credential-leak-auditor', category: 'software', title: 'Credential Leak Auditor', metric: 'Security prototype', desc: 'Audits employee email lists against a mock breach-check API and presents risk by department.' , links: [{ label: 'Live demo', href: 'https://credential-auditor-ft52xzyldqlth7x2wx9drc.streamlit.app' }, { label: 'Code', href: 'https://github.com/Fharuk/credential-auditor' }] },
   { slug: 'fraud-detection-pipeline', category: 'software', title: 'Financial Fraud Detection Pipeline', metric: '<200 ms simulation', desc: 'Isolation Forest anomaly scoring on simulated transactions, with outlier and geolocation flags.' },
   { slug: 'lagos-route-optimisation', category: 'software', title: 'Lagos Route Optimisation Engine', metric: '25% lower simulated distance', desc: 'Vehicle-routing model for four trucks and sixteen delivery stops, compared with sequential routing and visualised in Folium.' },
   { slug: 'microservices-backend', category: 'software', title: 'Event-Driven Microservices Backend', metric: 'Producer–consumer design', desc: 'Python demonstration of decoupled order and fulfilment services over an asynchronous, file-backed message queue.' },
   { slug: 'invoice-extraction', category: 'software', title: 'Automated Invoice Extraction', metric: 'Document pipeline', desc: 'Watcher and extraction workflow capturing invoice number, date and amount into a CSV log.' },
 
   // research
-  { slug: 'pi-domain-adaptation', category: 'research', title: 'Physics-Informed Domain Adaptation', metric: '100% precision & recall reported', desc: 'Digital-twin and 1D-CNN approach for CWRU-bearing sim-to-real fault diagnosis in a data-scarce setting.', links: [{ label: 'Zenodo', href: 'https://zenodo.org/records/18714046' }] },
+  { slug: 'pi-domain-adaptation', category: 'research', title: 'Physics-Informed Domain Adaptation', metric: '100% precision & recall reported', desc: 'Digital-twin and 1D-CNN approach for CWRU-bearing sim-to-real fault diagnosis in a data-scarce setting.', links: [{ label: 'Zenodo', href: 'https://zenodo.org/records/18794765' }] },
   { slug: 'pi-gans-fault-diagnosis', category: 'research', title: 'Zero-Shot Fault Diagnosis via PI-GANs', metric: '98.72% zero-shot accuracy reported', desc: 'Physics-informed GAN study for cross-domain industrial fault diagnosis.', links: [{ label: 'Zenodo', href: 'https://zenodo.org/records/18745734' }] },
   { slug: 'spiking-saturation', category: 'research', title: 'Binary Saturation in Recurrent Spiking Networks', metric: 'Model-behaviour study', desc: 'How homeostatic L2 regularisation can still yield high-activity regimes at high classification accuracy.', links: [{ label: 'Zenodo', href: 'https://zenodo.org/records/18794753' }] },
-  { slug: 'riemannian-bci', category: 'research', title: 'Riemannian Transfer Learning for Cross-Subject BCI', metric: '79.3% reported accuracy', desc: 'Euclidean alignment and SimCLR pre-training for motor-imagery decoding, with 0.27 ms reported inference latency.', links: [{ label: 'Zenodo', href: 'https://zenodo.org/records/18794765' }] },
+  { slug: 'riemannian-bci', category: 'research', title: 'Riemannian Transfer Learning for Cross-Subject BCI', metric: '79.3% reported accuracy', desc: 'Euclidean alignment and SimCLR pre-training for motor-imagery decoding, with 0.27 ms reported inference latency.', links: [{ label: 'Zenodo', href: 'https://zenodo.org/records/18714046' }] },
 ]
 
 export const projectNote =

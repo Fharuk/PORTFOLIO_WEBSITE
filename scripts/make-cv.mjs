@@ -29,6 +29,7 @@ import {
   cvSiteLabel,
   credentialIssuer,
   credentialYear,
+  doiFor,
 } from '../content/cv.ts'
 
 const here = dirname(fileURLToPath(import.meta.url))
@@ -253,7 +254,7 @@ site.research.forEach((record, i) => {
   doc.font('TextBold').fontSize(8.9).fillColor(INK)
   const titleH = doc.heightOfString(record.title, { width: CW - 74 })
   doc.text(record.title, M.left, y, { width: CW - 74 })
-  right(record.href.replace('https://', ''), { size: 7.4 })
+  right(doiFor(record) ?? record.href.replace('https://', ''), { size: 7.4 })
   y += titleH + 1.4
   block(`${record.method} — ${record.finding}`, { size: 8.3, color: BODY, leading: 1.38 })
 })

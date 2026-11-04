@@ -156,6 +156,18 @@ Motion either answers an action or communicates space.
   PDF after any content edit — nothing else in the repo can produce it, and
   a stale PDF is worse than none.
 - No per-project OG images; one static `og.png` covers the whole site.
+- Two Zenodo records were listed in the wrong order (PIDA and the Riemannian
+  BCI paper) for one deployment. Caught by fetching both records instead of
+  trusting the earlier website, which — unusually — had them right. The
+  lesson held: identifiers are checked against the source, never against a
+  previous rendering of the same mistake.
+- Project links come in three kinds and all three are labelled: `Live demo`
+  (Streamlit), `Code` (GitHub), `Zenodo` (the record). Every one was opened
+  before it was written down; the demos are asleep on Streamlit's free tier
+  and wake on first visit, which is expected rather than broken.
+- `g.dev/Akinmade-Faruq` is deliberately absent. It redirects to
+  `me.developers.google.com`, which asks a visitor to sign in — a profile link
+  that shows a login wall is worse than no link.
 - 19 of the 36 credentials still have no verification link. The other 17 do;
   the `verify` field renders only from a URL the issuer actually generated,
   because a verification link that fails to verify is worse than no link.

@@ -36,53 +36,53 @@ const details: Record<string, CaseStudyDetail> = {
   // ---- Research records --------------------------------------------------
   'pi-domain-adaptation': {
     context:
-      'Fault-diagnosis models are cheap to train on simulated data and unreliable when they meet a real machine, because the two distributions differ in exactly the ways a model cannot see. The question behind this project was whether physics could close that gap in a data-scarce setting.',
+      'Predictive maintenance has a structural problem: run-to-failure data barely exists, so a model trained in simulation has to survive real vibration it has never seen.',
     approach:
-      'A digital twin supplies the physical behaviour, a 1D convolutional network learns from it, and the adaptation step carries the representation onto measured bearing data — the CWRU dataset, the standard benchmark for this class of problem.',
+      'A digital twin of a DC motor is built from its coupled electromechanical equations — R = 2.0 Ω and B = 0.001 Nm·s/rad healthy, R = 0.5 Ω and B = 0.05 to simulate a stator short and a bearing fault — with zero-mean Gaussian noise standing in for the gap between simulation and sensor. A 1D-CNN learns from that.',
     result:
-      'The project record reports 100% precision and 100% recall on the target set.',
+      'Trained on fully simulated data plus half of the real vibration series, the model returned 100% precision and 100% recall on the CWRU bearing set.',
     limits:
-      'A benchmark result at that level is a statement about a clean, well-labelled dataset, not about a plant floor. It is reported here as the record reports it, and no field deployment is claimed.',
+      'One benchmark, one motor model, one fault family. A sim-to-real result is not a plant-floor deployment, and the record does not claim one.',
   },
   'pi-gans-fault-diagnosis': {
     context:
-      'The harder version of the same problem: diagnose a fault in a domain you have no labelled examples from at all, so an adaptation step would have nothing to adapt against.',
+      'The harder version of the same problem: diagnose a fault class the model has never been trained on at all, so there is no target-domain data to adapt against.',
     approach:
-      'Physics-informed generative modelling — the physical constraint shapes what the generator is allowed to produce, so the synthetic target-domain data stays inside the behaviour the machine can actually exhibit.',
+      'A GAN whose generator loss carries a differentiable physics engine — Ohm’s and Newton’s laws — beside the adversarial term. Fifty epochs on synthetic DC-motor faults, then inference at R = 0.5 Ω to imitate a stator short circuit on real bearings.',
     result:
-      'The record reports 98.72% zero-shot accuracy and 77.22% once interpolating between domains.',
+      '98.72% zero-shot accuracy across 235 real CWRU signal windows on unseen inner-race faults, 77.22% inter-domain accuracy on outer-race faults, and a physics residual that falls to 78.4% — evidence the generator is obeying the physics rather than the noise.',
     limits:
-      'Zero-shot accuracy is measured against held-out labelled data in the study, not against a live asset. The 77.22% inter-domain figure is the honest cost of moving between domains and is included for that reason.',
+      'Two fault families on one benchmark. The 77.22% is the honest cost of crossing domains, which is why it is quoted next to the stronger number rather than instead of it.',
   },
   'active-vibration-control': {
     context:
-      'Vibration control in a nonlinear system is usually handled by a hand-tuned PID loop — competent near the operating point it was tuned for, and wrong as soon as the system moves.',
+      'A PID loop is tuned once, for one operating point. Nonlinear dynamics punish that: overshoot, oscillation, and energy spent fighting them.',
     approach:
-      'A Soft Actor-Critic agent adjusts the PID gains online instead of a human choosing them once, learning a policy over states rather than a fixed set of constants.',
+      'A Soft Actor-Critic agent re-tunes the proportional, integral and derivative gains every 10 ms inside a custom Gym environment built on the DC motor’s electromechanical behaviour.',
     result:
-      'The record reports a 40% reduction in settling time and a 17% efficiency gain against Ziegler–Nichols tuning.',
+      'Overshoot eliminated, settling time down 40%, energy efficiency up 17% against Ziegler–Nichols tuning — and the agent converges on variable-structure logic, hardening or softening the loop as the dynamics demand.',
     limits:
-      'This is a simulation result measured against a classical baseline. The comparison is with Ziegler–Nichols specifically, not with every tuning method in the literature.',
+      'Simulated motor dynamics in an in-house environment, compared against a tuning rule rather than a field-tuned controller.',
   },
   'spiking-saturation': {
     context:
-      'A spiking network can look excellent on a classification metric while its population is doing something completely unlike the behaviour the model was supposed to have. This study went looking for that failure mode.',
+      'Spiking networks are sold as energy-efficient because they fire sparsely. Trained with surrogate gradients they can also drift into firing constantly — accurate, and more like a conventional digital circuit than a brain.',
     approach:
-      'Recurrent spiking networks under homeostatic L2 regularisation, with activity tracked separately from accuracy so the two could be compared rather than conflated.',
+      'A rate-coded recurrent SNN with homeostatic L2 regularisation, which is meant to hold the mean firing rate near 5%, trained on a temporal anomaly-detection task.',
     result:
-      'High-activity regimes can persist even where classification accuracy is high — the regulariser does not guarantee the behaviour it is named for.',
+      'The network reached 100% classification accuracy while 49.2% of its neurons were firing. A synaptic-efficiency metric then quantifies what the accuracy cost: the network can be right and still be running far from sparsity.',
     limits:
-      'A model-behaviour study, not a benchmark entry. It reports a phenomenon and does not claim a fix.',
+      'One architecture, one task. The paper argues from that result that sparsity needs hard structural constraints rather than a functional penalty — a claim about this class of training, not a theorem.',
   },
   'riemannian-bci': {
     context:
-      'Brain–computer interfaces break down across subjects: a decoder calibrated on one person’s motor-imagery signal does not transfer to the next, and recalibrating per subject is the thing that stops these systems leaving the lab.',
+      'Every new brain–computer interface user pays a calibration tax: minutes of data collection before the decoder works, because EEG differs more between people than between thoughts.',
     approach:
-      'Euclidean alignment to remove the per-subject covariance shift, then SimCLR-style self-supervised pre-training to learn a representation that survives the transfer.',
+      'Euclidean alignment maps each subject’s covariance structure into a shared space, a shallow ConvNet extracts temporal and spatial features, and SimCLR pre-training on unlabelled recordings carries the representation across subjects.',
     result:
-      'The record reports 79.3% cross-subject accuracy with 0.27 ms inference latency.',
+      '79.3% accuracy on a subject excluded entirely from training, against a 25% chance baseline, at 0.27 ms average inference latency — with t-SNE showing clusters that separate classes rather than people.',
     limits:
-      'Reported accuracy on a public motor-imagery dataset. The latency figure is inference only and says nothing about the rest of a real-time pipeline.',
+      'Four-class motor imagery on a public dataset. The claim is a lower calibration cost, not a clinical-grade decoder.',
   },
 
   // ---- P6 planning models ------------------------------------------------
@@ -149,6 +149,63 @@ export type CaseStudy = {
   summary: string
   detail?: CaseStudyDetail
   links: { label: string; href: string }[]
+  /**
+   * The formal publication behind a research record.
+   *
+   * The short title above is what fits on a card. This is what the paper is
+   * actually called on Zenodo, with its DOI and the editor the record names —
+   * so a citation taken from this page can be checked against the source.
+   */
+  published?: {
+    title: string
+    doi: string
+    editors?: string[]
+    venue: string
+  }
+}
+
+/**
+ * Publications, keyed by slug. Titles, DOIs and editors were read back from
+ * the Zenodo records themselves — which is how the two crossed entries in the
+ * research list were caught — not from the earlier website, which had them in
+ * a different order.
+ */
+const published: Record<string, NonNullable<CaseStudy['published']>> = {
+  'pi-domain-adaptation': {
+    title:
+      'Physics-Informed Domain Adaptation: A Digital Twin Approach to Fault Diagnosis in Data-Scarce Industrial Environments',
+    doi: '10.5281/zenodo.18794765',
+    editors: ['Aro, Emmanuel'],
+    venue: 'Zenodo · journal',
+  },
+  'pi-gans-fault-diagnosis': {
+    title:
+      'Zero-Shot Industrial Fault Diagnosis via Physics-Informed Generative Adversarial Networks (PI-GANs): A Cross-Domain Validation Study',
+    doi: '10.5281/zenodo.18745734',
+    editors: ['Aro, Emmanuel'],
+    venue: 'Zenodo · journal',
+  },
+  'active-vibration-control': {
+    title:
+      'Autonomous Active Vibration Control: A Deep Reinforcement Learning Approach for Dynamic PID Tuning in Non-Linear Systems',
+    doi: '10.5281/zenodo.18794732',
+    editors: ['Aro, Emmanuel'],
+    venue: 'Zenodo · journal',
+  },
+  'spiking-saturation': {
+    title:
+      'Binary Saturation Dynamics in Recurrent Spiking Neural Networks: Limitations of Homeostatic Regularization',
+    doi: '10.5281/zenodo.18794753',
+    editors: ['Amuzat, Habeeb'],
+    venue: 'Zenodo · journal',
+  },
+  'riemannian-bci': {
+    title:
+      'Riemannian Transfer Learning for Cross-Subject BCI: A ShallowConvNet Approach to Zero-Calibration Motor Imagery Decoding',
+    doi: '10.5281/zenodo.18714046',
+    editors: ['Amuzat, Habeeb'],
+    venue: 'Zenodo · journal',
+  },
 }
 
 function fromProject(p: Project): CaseStudy {
@@ -167,6 +224,7 @@ function fromProject(p: Project): CaseStudy {
     summary: p.desc,
     detail: details[p.slug],
     links: p.links ?? [],
+    ...(published[p.slug] ? { published: published[p.slug] } : {}),
   }
 }
 

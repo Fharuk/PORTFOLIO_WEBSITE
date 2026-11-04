@@ -81,14 +81,17 @@ function FeaturedCard({ project, large }: { project: Project; large?: boolean })
           >
             Case study
           </Link>
-          {project.links?.[0] && (
+          {project.links?.map((link) => (
             <a
-              href={project.links[0].href}
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noreferrer noopener"
               className="text-[0.875rem] text-[var(--color-haze)] transition-colors duration-150 hover:text-[var(--color-mist)]"
             >
-              {project.links[0].label} ↗
+              {link.label} ↗
             </a>
-          )}
+          ))}
         </span>
       </div>
     </article>
@@ -119,14 +122,17 @@ function CatalogueRow({ project }: { project: Project }) {
         >
           Case study
         </Link>
-        {project.links?.[0] && (
+        {project.links?.map((link) => (
           <a
-            href={project.links[0].href}
+            key={link.href}
+            href={link.href}
+            target="_blank"
+            rel="noreferrer noopener"
             className="text-[0.8125rem] text-[var(--color-haze)] transition-colors duration-150 hover:text-[var(--color-mist)]"
           >
-            {project.links[0].label} ↗
+            {link.label} ↗
           </a>
-        )}
+        ))}
       </div>
     </li>
   )

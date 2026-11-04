@@ -90,6 +90,18 @@ export const cvVerifiedCount = cvCredentialGroups.reduce(
   0,
 )
 
+/**
+ * The DOI for a research record, from its Zenodo record number.
+ *
+ * Zenodo mints `10.5281/zenodo.<record id>`, so this is a derivation rather
+ * than a guess — and it beats printing a URL on paper, because a DOI is the
+ * identifier a citation is checked against.
+ */
+export function doiFor(record: { href: string }): string | undefined {
+  const id = record.href.match(/zenodo\.org\/records\/(\d+)/)?.[1]
+  return id ? `10.5281/zenodo.${id}` : undefined
+}
+
 /** The caveat that keeps every number on the page honest. */
 export const cvNote =
   'Project figures are simulation, prototype or dataset-level results as reported in the project materials — not field performance. The Primavera P6 models are planning exercises, not executed projects or approved contract values. Research records are not peer-reviewed publications.'

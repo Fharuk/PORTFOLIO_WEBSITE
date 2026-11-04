@@ -93,6 +93,34 @@ export function About() {
                 </div>
               ))}
             </dl>
+
+            <hr className="rule" />
+
+            {/* The toolkit, grouped by discipline. Every entry here appears in
+                a project record or a paper — it is a description of the work,
+                not a wish list. */}
+            <div>
+              <h3
+                id="stack-heading"
+                className="tabular text-[0.75rem] uppercase tracking-[0.16em] text-[var(--color-haze)]"
+                style={{ fontFamily: 'var(--font-body)', fontWeight: 600 }}
+              >
+                Toolkit
+              </h3>
+              <dl
+                aria-labelledby="stack-heading"
+                className="mt-6 grid gap-x-10 gap-y-7 sm:grid-cols-2"
+              >
+                {site.stack.map((group) => (
+                  <div key={group.group}>
+                    <dt className="text-[0.9375rem] text-[var(--color-bone)]">{group.group}</dt>
+                    <dd className="m-0 mt-1.5 text-[0.875rem] leading-relaxed text-[var(--color-haze)]">
+                      {group.items.join(' · ')}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
           </div>
         </div>
       </div>

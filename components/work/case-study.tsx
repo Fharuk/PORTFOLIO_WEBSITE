@@ -30,6 +30,15 @@ export function CaseStudyView({ study }: { study: CaseStudy }) {
     author: { '@type': 'Person', name: site.fullName, url: absolute('/') },
     keywords: [study.eyebrow, 'electrical engineering', 'Nigeria'].join(', '),
     ...(study.links.length ? { sameAs: study.links.map((l) => l.href) } : {}),
+    ...(study.published
+      ? {
+          identifier: `https://doi.org/${study.published.doi}`,
+          editor: study.published.editors?.map((name) => ({
+            '@type': 'Person',
+            name: name.split(', ').reverse().join(' '),
+          })),
+        }
+      : {}),
   }
 
   return (
@@ -63,6 +72,40 @@ export function CaseStudyView({ study }: { study: CaseStudy }) {
                 <p className="mt-6 max-w-[58ch] text-[1.0625rem] leading-relaxed text-[var(--color-mist)]">
                   {study.summary}
                 </p>
+
+                {/* The publication record, verbatim: the full title it was
+                    published under, its DOI, and the editor Zenodo names. The
+                    h1 above is the short name a card can hold; this is the one
+                    a citation has to match. */}
+                {study.published && (
+                  <div
+                    className="mt-8 max-w-[62ch] border-l-2 pl-4"
+                    style={{ borderColor: 'color-mix(in oklab, var(--accent-2) 55%, transparent)' }}
+                  >
+                    <p className="tabular text-[0.75rem] uppercase tracking-[0.14em] text-[var(--color-haze)]">
+                      Published record
+                    </p>
+                    <p className="mt-2 text-[0.9375rem] leading-snug text-[var(--color-bone)]">
+                      {study.published.title}
+                    </p>
+                    <p className="mt-2 text-[0.8125rem] leading-relaxed text-[var(--color-haze)]">
+                      {study.published.venue} · DOI{' '}
+                      <a
+                        href={`https://doi.org/${study.published.doi}`}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="link text-[var(--color-mist)]"
+                      >
+                        {study.published.doi}
+                      </a>
+                      {study.published.editors?.length
+                        ? ` · edited by ${study.published.editors
+                            .map((name) => name.split(', ').reverse().join(' '))
+                            .join(', ')}`
+                        : ''}
+                    </p>
+                  </div>
+                )}
               </div>
 
               <div className="md:justify-self-end md:text-right">
@@ -116,7 +159,11 @@ export function CaseStudyView({ study }: { study: CaseStudy }) {
             <div className="mt-[clamp(3rem,6vw,4rem)] grid gap-8 border-t border-[color-mix(in_oklab,var(--color-shale)_60%,transparent)] pt-8 md:grid-cols-2">
               <div>
                 <h2 className="text-[0.8125rem] uppercase tracking-[0.14em] text-[var(--color-haze)]">
-                  {study.links.length ? 'The primary record' : 'About these figures'}
+                  {study.links.some((l) => l.label === 'Live demo')
+                    ? 'Live system, code and record'
+                    : study.links.length
+                      ? 'The primary record'
+                      : 'About these figures'}
                 </h2>
                 {study.links.length ? (
                   <ul className="m-0 mt-3 list-none p-0">
