@@ -137,6 +137,41 @@ const details: Record<string, CaseStudyDetail> = {
       { label: 'Modelled budget', value: 'US$17.35m' },
     ],
   },
+
+  // ---- Builds added from the repository record ---------------------------
+  // Written from each repository's own README, which is the only material we
+  // have on them. Where the README is silent — traffic, funding, whether it
+  // shipped — so is this.
+  'omo-onile-radar': {
+    context:
+      'A Lagos plot is sold off a survey plan, and the plan states its position in the Nigerian Minna Datum — a system no consumer mapping app accepts and most buyers cannot read. The question a buyer actually has is simple: where is this land, and does it fall inside a government acquisition?',
+    approach:
+      'A Streamlit application: GPT-4 Vision reads the photographed survey plan, the extracted coordinates are reviewed and corrected in the interface, then transformed from Minna Datum (EPSG:26331 and 26332, the western and eastern zones) into WGS84. Folium plots the boundary over Esri satellite imagery, with CSV export, email alerts on submitted leads, and term-based checks for acquisition zones and red-flag wording. A demo mode runs without an API key.',
+    result:
+      'One path from a photographed plan to a plotted boundary, with both Minna zones supported and the coordinates editable before anything is mapped.',
+    limits:
+      'The coordinates are editable precisely because the OCR output is reviewed rather than trusted, and the acquisition warning is a term check, not a search of the state register. It supports due diligence; it is not a title search and does not establish ownership.',
+  },
+  'kith-verified-housing': {
+    context:
+      'Student housing in Nigeria is transacted on trust in both directions: a room is paid for before it is seen, and a landlord hands over keys to someone they have never met. The constraint was to make the money wait until the facts had been checked — the student verified, the home inspected.',
+    approach:
+      'A pnpm monorepo: a Next.js web app and a realtime service on Prisma, with four roles (student, landlord, porter, admin) and a PGlite fallback so the build runs without a Postgres server. Reserving writes a pending booking and a pending 85/15 transaction and holds the room, then sends the student to Paystack — or to a mock checkout when no live key is set. Nothing confirms until a signed charge.success webhook arrives, which flips the booking, moves the escrow from pending to held, mints the guest pass and notifies both sides. Tampered amounts, wrong signatures and replays are refused and audited.',
+    result:
+      'The reserve → pay → escrow → pass path is wired end to end, with NIMC verification and porter inspection standing between a booking and a confirmed tenancy. Scoped to launch at FUNAAB and UNILAG.',
+    limits:
+      'This is the build, not a launched marketplace: no real tenancies have run through it, and the escrow split is a product decision rather than a regulated deposit scheme. Paystack integration is exercised through its signed-webhook contract and a mock checkout.',
+  },
+  'arkvolt-storefront': {
+    context:
+      'A one-engineer IT hardware business in Lagos was running a shop out of WhatsApp threads and memory. The constraint was to give it a storefront and a back office the owner could run without editing code, while leaving payment where the customers already are.',
+    approach:
+      'A Next.js 14 App Router storefront plus a noindex admin dashboard, over an Express and Prisma API on PostgreSQL. Shared zod schemas and money, date and WhatsApp helpers live in one package so the two surfaces cannot drift. Public routes cover the catalogue, the repair bench, laptop-title requests, the cart and order lookup; admin routes cover products, orders, bookings, enquiries, services and settings, with an audit log and rate limits on the API.',
+    result:
+      'Both surfaces are built and deployable — storefront and dashboard to Vercel, API and database to Render — with the whole catalogue, booking and enquiry flow operable from the dashboard.',
+    limits:
+      'No payment gateway by design, so revenue is still confirmed by hand on WhatsApp; the "checkout" records intent, not money. It is a build for one business, not a multi-tenant platform.',
+  },
 }
 
 export type CaseStudy = {

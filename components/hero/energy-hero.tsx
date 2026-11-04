@@ -83,7 +83,7 @@ export function EnergyHero() {
                 { k: '300 MW', v: 'offshore wind BoP modelled' },
                 { k: '722', v: 'P6 activities across 3 models' },
                 { k: '5', v: 'research records on Zenodo' },
-                { k: '26', v: 'projects catalogued' },
+                { k: '29', v: 'projects catalogued' },
               ].map((s) => (
                 <div key={s.k} className="text-left md:text-right">
                   <dt className="metric text-[1.35rem] leading-none">{s.k}</dt>

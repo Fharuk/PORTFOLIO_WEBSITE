@@ -12,7 +12,7 @@ export const dynamic = 'force-static'
  * so search engines have an unambiguous answer.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date('2026-10-30')
+  const lastModified = new Date('2026-11-04')
   const studies = caseStudies.map((c) => ({
     url: absolute(`/work/${c.slug}`),
     lastModified,

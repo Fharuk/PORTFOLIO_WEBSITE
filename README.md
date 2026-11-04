@@ -78,10 +78,13 @@ the whole OpenGraph block rather than just its title, because Next **replaces** 
 parent's `openGraph` object wholesale instead of deep-merging: a page that set
 only `openGraph.title` would silently lose the share image.
 
-The share card is a committed 1200×630 PNG at `public/og.png`, generated with
-satori (`next/og`) rather than a `opengraph-image.tsx` route, because dynamic
-image routes are unavailable under `output: 'export'`. Regenerate it after
-changing the copy:
+Share cards are committed 1200×630 PNGs — `public/og.png` for the site and one
+per case study at `public/og/<slug>.png` — generated with satori (`next/og`)
+rather than a `opengraph-image.tsx` route, because dynamic image routes are
+unavailable under `output: 'export'`. Each card is built from the same content
+modules the page renders, so a retitled project produces a retitled card. The
+script imports `content/case-studies.ts` directly, which is why it runs through
+the same type-stripping loader as the CV. Regenerate after changing any copy:
 
 ```bash
 npm run og
@@ -130,7 +133,7 @@ nothing here needs editing when a custom domain is attached.
 Real, not placeholder. Sourced from the existing portfolio at
 `fharuk.github.io/portfolio` and the documents in the shared Drive folder:
 
-- 26 projects across engineering (7), AI & data (9), software & IT (6) and research (4)
+- 29 projects across engineering (7), AI & data (10), software & IT (8) and research (4)
 - 3 Primavera P6 planning models — 300 MW offshore wind BoP, pipeline rehabilitation, pipeline replacement — with their activity, relationship, assignment and risk counts
 - 5 research records on Zenodo
 - B.Eng. Electrical & Electronics Engineering, FUNAAB, July 2025

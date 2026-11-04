@@ -255,7 +255,7 @@ export function CvDocument() {
                 ))}
               </ul>
               <p className="mt-4 text-[0.8125rem] text-[var(--color-haze)]">
-                Six of twenty-six.{' '}
+                Six of twenty-nine.{' '}
                 <Link href="/work" className="link text-[var(--color-mist)]">
                   Every build, with a case study
                 </Link>

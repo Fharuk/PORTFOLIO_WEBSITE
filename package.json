@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "og": "node scripts/make-og.mjs",
+    "og": "node --experimental-strip-types --loader ./scripts/ts-resolve.mjs scripts/make-og.mjs",
     "cv": "node --experimental-strip-types --loader ./scripts/ts-resolve.mjs scripts/make-cv.mjs",
     "budget": "node scripts/check-budget.mjs"
   },

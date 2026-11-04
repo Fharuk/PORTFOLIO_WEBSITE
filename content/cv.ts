@@ -8,7 +8,7 @@ import { projects, site, type Credential } from '@/content/site'
  * restated in prose that could drift away from the site, and nothing is
  * asserted here that the site does not already say.
  *
- * The one deliberate omission: the CV shows six of the twenty-six builds.
+ * The one deliberate omission: the CV shows six of the twenty-nine builds.
  * A two-page document that lists thirty software demos reads as a list, not
  * as a person. The full catalogue — and a case study for every record — lives
  * on the site, which is what /cv points at.

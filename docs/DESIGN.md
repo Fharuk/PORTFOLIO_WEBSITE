@@ -13,7 +13,7 @@ technical support, in Lagos.
 That is not a persona tweak. The liquid-chrome hero, the "design systems"
 capability list, the invented projects — all of it was wrong and was removed.
 What survived was the craft layer: the type system, the motion rules, the glass,
-the scroll engine. What replaced the content is his actual record: 26 projects,
+the scroll engine. What replaced the content is his actual record: 29 projects,
 3 P6 models, 5 Zenodo records, 36 credentials, and three degrees — two of them
 still in progress, which the Education block says out loud.
 
@@ -145,7 +145,7 @@ Motion either answers an action or communicates space.
 
 ## Known gaps
 
-- Case studies exist at `/work/[slug]` for all 29 records (26 projects and the
+- Case studies exist at `/work/[slug]` for all 32 records (29 projects and the
   three P6 models), but only eight have long-form sections. The rest render
   the record itself — metric, description, caveat — because inventing a
   constraint and an approach for a build we have no material on would be
@@ -155,7 +155,13 @@ Motion either answers an action or communicates space.
   file a recruiter attaches to an application. `npm run cv` regenerates the
   PDF after any content edit — nothing else in the repo can produce it, and
   a stale PDF is worse than none.
-- No per-project OG images; one static `og.png` covers the whole site.
+- Every case study has its own share card (`public/og/<slug>.png`), built from
+  the same content module the page renders: discipline, title, the number it
+  reports, and the DOI if it has one. A link to one project no longer previews
+  as "Akinmade Faruq Adeoye" with no indication of which project it is. The
+  cards are committed rather than rendered per request, so the crawlers that
+  matter get a PNG instead of waiting on a function — and the ~1 MB they add
+  is images, not JavaScript, so the budget above is untouched.
 - Two Zenodo records were listed in the wrong order (PIDA and the Riemannian
   BCI paper) for one deployment. Caught by fetching both records instead of
   trusting the earlier website, which — unusually — had them right. The
