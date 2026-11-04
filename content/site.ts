@@ -64,6 +64,9 @@ export const categoryLabels: Record<Category, string> = {
 export const site = {
   name: 'Faruq',
   fullName: 'Akinmade Faruq Adeoye',
+  // A nickname he goes by. Presented as "known as", never as a title or a
+  // credential: "Dr." here is not a doctorate, and the site must not imply one.
+  nickname: 'Dr. Archimedis',
   role: 'Electrical & Electronics Engineer',
   discipline: 'B.Eng. Electrical & Electronics Engineering · FUNAAB',
   location: 'Lagos, Nigeria',
@@ -199,32 +202,64 @@ export const site = {
   // ---- Experience ------------------------------------------------------
   experience: [
     {
-      period: '2021 — present',
-      title: 'PC Specialist',
-      org: 'ARKVOLT Tech · Lagos',
+      period: 'Sep 2020 — present',
+      title: 'IT Support Technician',
+      org: 'Arkvolt · Lagos · Part-time · Hybrid',
       summary:
-        'Custom builds, upgrades, component sourcing and after-purchase support. Diagnose hardware and software faults, and advise customers on component choices against real needs and budget.',
+        'Built a personal computer and upgraded an existing one for optimal performance — hands-on work with hardware components and system configuration, carried into ongoing technical support.',
     },
     {
-      period: '2023 — 2025',
-      title: 'Electoral Representative',
-      org: 'NUESA & FUNAABSU Independent Electoral Committees',
+      period: 'Jun 2023 — present',
+      title: 'Engineer Intern',
+      org: 'Transmission Company of Nigeria · Lagos · Part-time',
       summary:
-        'Supported governance of student electoral processes, with an emphasis on transparency and fair process.',
+        'Power-system analysis and troubleshooting inside the national transmission operator.',
     },
     {
-      period: '2016 — 2022',
-      title: 'Teaching, tutoring & STEM education',
-      org: 'Phenomenal Scholars · Ansar-ud-Deen College · Conscience International · private tutoring',
+      period: 'Jun 2026 — Oct 2026',
+      title: 'Financial Engineer',
+      org: '10th International Conference on ICICPE · Chiang Mai, Thailand · Remote',
       summary:
-        'Taught Mathematics, Basic Science, Physics and technology subjects across school and tutoring settings; planned lessons, tracked progress, adapted instruction to the learner.',
+        'Published the paper “Explainable Machine Learning for Credit Risk Assessment Under Macroeconomic Stress: A Nigerian Economic Context Framework”.',
     },
     {
-      period: '2021',
-      title: 'Logistics Staff',
-      org: 'Chi Limited · Lagos',
+      period: 'Jul 2025 — Nov 2025',
+      title: 'Field Engineer',
+      org: 'Axon Integrated Services Limited · Gbagada, Lagos',
+      summary: 'Supervised the telecommunication network.',
+    },
+    {
+      period: 'Aug 2016 — Sep 2024',
+      title: 'High School Science Teacher',
+      org: 'Continuous Education Centre, Ansar-ud-Deen · Lagos · Part-time',
       summary:
-        'Inventory tracking and distribution coordination inside an FMCG operation.',
+        'Taught science across the secondary curriculum for eight years, planning lessons, tracking progress and adapting instruction to the learner.',
+    },
+    {
+      period: 'Feb 2023 — Mar 2023',
+      title: 'Assisting Presiding Officer',
+      org: 'INEC Nigeria',
+      summary:
+        'Supervised the electoral process for over 500 voters, working to strict guidelines under pressure.',
+    },
+    {
+      period: 'Jul 2022 — Oct 2022',
+      title: 'School Teacher',
+      org: 'Phenomenal Scholars School',
+      summary:
+        'Developed and delivered lesson plans in Mathematics and Basic Science for 40+ students, raising participation.',
+    },
+    {
+      period: 'Jan 2021 — Dec 2021',
+      title: 'Logistics Specialist',
+      org: 'CHI Limited · Lagos',
+      summary: 'Managed high-value inventory and coordinated goods distribution with drivers.',
+    },
+    {
+      period: 'Oct 2016 — Jul 2017',
+      title: 'School Teacher',
+      org: 'Conscience International School · Lagos',
+      summary: 'Classroom teaching in Mathematics and Basic Science.',
     },
   ] as Role[],
 
@@ -245,22 +280,33 @@ export const site = {
   // Most recent first. The MScFE follows WorldQuant University's own naming
   // and is marked in progress: enrolled is not the same claim as graduated, and
   // a portfolio should never blur those two.
+  // Most recent first. Both the MScFE and the BBA are in progress and say so:
+  // enrolled is not the same claim as graduated, and a portfolio should never
+  // blur those two.
   education: [
     {
       degree: 'MSc Financial Engineering',
       school: 'WorldQuant University',
-      date: 'In progress',
+      date: 'Jan 2026 — Jan 2028 · in progress',
+    },
+    {
+      degree: 'BBA Business Administration and Management',
+      school: 'University of the People',
+      date: 'Sep 2025 — Sep 2029 · in progress',
     },
     {
       degree: 'B.Eng. Electrical & Electronics Engineering',
       school: 'Federal University of Agriculture, Abeokuta (FUNAAB)',
-      date: 'July 2025',
+      date: 'Oct 2021 — May 2025',
     },
   ] as EducationEntry[],
 
   credentials: {
     'Project & leadership': [
       { title: 'Google Project Management Professional Certificate', issuer: 'Google / Coursera · 7 courses · Oct 2026' },
+      { title: 'Project Planning: Putting It All Together', issuer: 'Google / Coursera · Oct 2026' },
+      { title: 'Project Initiation: Starting a Successful Project', issuer: 'Google / Coursera · Oct 2026' },
+      { title: 'Microsoft Project Management', issuer: 'Microsoft / Coursera · Sep 2025' },
       { title: 'Project Engineering Management Training Programme for Engineering Graduates', issuer: 'NCDMB with Elevated Express Limited · Lagos · Oct 2026' },
       { title: 'Aspire Leaders Program', issuer: 'Aspire Institute · 40 hours · Dec 2025' },
       { title: 'Security Risk Management Professional – Country (SRMP-C)', issuer: 'INSSA · May 2024 · 3-year validity stated' },
@@ -273,28 +319,33 @@ export const site = {
     'Engineering & energy': [
       { title: 'IoT Wireless & Cloud Computing Emerging Technologies', issuer: 'Yonsei University / Coursera · Jun 2025' },
       { title: 'Energy Access and Just Transition', issuer: 'Green Hub Africa · Jul 2025' },
-      { title: 'Complete Course in AutoCAD: 2D and 3D', issuer: 'CADCIM Technologies / Udemy · certificate supplied' },
-      { title: 'Electronics Mastery: The Beginner’s Course in Electronics', issuer: 'Udemy · certificate supplied' },
+      { title: 'Complete Course in AutoCAD: 2D and 3D', issuer: 'CADCIM Technologies / Udemy · Jan 2024' },
+      { title: 'Electronics Mastery: The Beginner’s Course in Electronics', issuer: 'Lab Awesome / Udemy · Jan 2024' },
     ] as Credential[],
     'Data & AI': [
       { title: 'IBM Data Science Professional Certificate', issuer: 'IBM / Coursera · 12 courses · Aug 2025' },
       { title: 'Applied Data Science Lab', issuer: 'WorldQuant University · Aug 2025' },
+      { title: 'Microsoft Python Development', issuer: 'Microsoft / Coursera · Sep 2025' },
+      { title: 'Data Science Essentials with Python', issuer: 'Cisco · Sep 2025' },
+      { title: '5-Day AI Agents Intensive Course with Google', issuer: 'Kaggle · Dec 2025' },
       { title: 'Ethics of AI', issuer: 'University of Helsinki · 2 ECTS · Jul 2025' },
       { title: 'Data Literacy — What Is It and Why Does It Matter?', issuer: '4EU+ Alliance / Coursera · Jul 2025' },
       { title: 'Excel Fundamentals for Data Analysis', issuer: 'Macquarie University / Coursera · Jul 2025' },
       { title: 'What Is Data Science?', issuer: 'IBM / Coursera · Jul 2025' },
       { title: 'What Is Generative AI?', issuer: 'LinkedIn Learning · Jun 2025' },
+      { title: 'Basic Information Literacy', issuer: 'Coursera · Jun 2025' },
     ] as Credential[],
     'IT & software': [
-      { title: 'IBM IT Support Professional Certificate', issuer: 'IBM / Coursera · 9 courses · Aug 2025' },
-      { title: 'Microsoft IT Support Specialist Professional Certificate', issuer: 'Microsoft / Coursera · 6 courses · Aug 2025' },
-      { title: 'Dell Technologies Technical Customer Support Specialist', issuer: 'Dell Technologies / Coursera · 5 courses · Aug 2025' },
+      { title: 'IBM IT Support Professional Certificate', issuer: 'IBM / Coursera · 9 courses · Jan 2025' },
+      { title: 'Microsoft IT Support Specialist Professional Certificate', issuer: 'Microsoft / Coursera · 6 courses · Jan 2025' },
+      { title: 'Dell Technologies Technical Customer Support Specialist', issuer: 'Dell Technologies / Coursera · 5 courses · Jan 2025' },
       { title: 'Microsoft 365 Ultimate Guide', issuer: 'Udemy · 22.5 hours · Jun 2024' },
     ] as Credential[],
     'Education & communication': [
       { title: 'Teaching English as a Foreign Language (TEFL)', issuer: 'Teacher Record · 120 hours · Distinction · Jun 2024' },
       { title: 'Jobberman Soft-Skills Training', issuer: 'Jobberman / Propel · Jun 2025' },
       { title: 'Mentorship Principles', issuer: 'North American Division Leadership Certification · Jun 2024' },
+      { title: 'EF SET English Certificate 56/100 (B2 Upper Intermediate)', issuer: 'EF SET · Jun 2026' },
       { title: 'The Fundamentals of Digital Marketing', issuer: 'Google Digital Skills for Africa · May 2022' },
     ] as Credential[],
   },

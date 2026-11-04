@@ -31,6 +31,9 @@ export function About() {
 
             <div className="mt-5 max-w-[24rem]">
               <p className="text-[1.0625rem] text-[var(--color-bone)]">{site.fullName}</p>
+              <p className="mt-0.5 text-[0.8125rem] text-[var(--color-haze)]">
+                known as {site.nickname}
+              </p>
               <p className="mt-1 text-[0.875rem] leading-relaxed text-[var(--color-haze)]">
                 {site.discipline}
                 <br />

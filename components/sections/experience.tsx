@@ -84,7 +84,7 @@ export function Experience() {
 /**
  * Credentials, grouped and collapsed by default.
  *
- * 28 certificates in one flat list is a wall nobody reads. Grouping them by what
+ * A long flat list of certificates is a wall nobody reads. Grouping them by what
  * they are for, and letting each group close, keeps the section scannable while
  * keeping every item available. Built on <details> so it works without JS.
  */
